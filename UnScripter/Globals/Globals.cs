@@ -1,13 +1,3 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace UnScripter
 {
@@ -36,18 +26,6 @@ namespace UnScripter
         public static bool ExecuteStandaloneOnBuildFinished { get; set; }
         public static Build.Compile Compiler { get; set; }
         public static Build.Run Run { get; set; }
-
-        private static Project.Project _currentproject;
-        public static Project.Project CurrentProject
-        {
-            get { return _currentproject; }
-            set
-            {
-                _currentproject = value;
-                //projectManager.ChangeProject(_currentproject);
-            }
-        }
-
     }
 }
 

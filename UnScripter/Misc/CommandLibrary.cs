@@ -1,15 +1,5 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Diagnostics;
-using System.Windows.Forms;
-using System.Linq;
-using System.Xml.Linq;
-using System.Xml;
-using System.Text;
+
 namespace UnScripter
 {
 	// Stores shortened names for system commands (meant for embedding commands into html)

@@ -1,15 +1,23 @@
+using Ninject;
 using System;
 using System.Windows.Forms;
 using UnScripter.Project;
 
 namespace UnScripter
 {
-	public class ProjectFolderContextMenu : ContextMenuStrip
+	class ProjectFolderContextMenu : ContextMenuStrip
 	{
         public ProjectFolder ClickedProjectFolder { get; set; }
 
-		public ProjectFolderContextMenu()
+        private ProjectManager projectManager;
+        private ProjectNewFileDialog projectNewFileDialog;
+
+        [Inject]
+        public ProjectFolderContextMenu(ProjectManager projectManager, ProjectNewFileDialog projectNewFileDialog)
 		{
+            this.projectManager = projectManager;
+            this.projectNewFileDialog = projectNewFileDialog;
+
 			Items.Add("Add New File", null, AddNewFile);
 			Items.Add("-");
 			Items.Add("Open Path", null, OpenPath);
@@ -18,7 +26,7 @@ namespace UnScripter
 
 		private void AddNewFile(object sender, EventArgs e)
 		{
-			new ProjectNewFileDialog().ShowDialog();
+			projectNewFileDialog.ShowDialog();
 		}
 
 		private void OpenPath(object sender, EventArgs e)
@@ -28,7 +36,7 @@ namespace UnScripter
 
 		private void RefreshDirectories(object sender, EventArgs e)
 		{
-			Globals.CurrentProject.FileList.RefreshDirectories();
+			projectManager.CurrentProject.FileList.RefreshDirectories();
 		}
 	}
 }

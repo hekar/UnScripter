@@ -1,87 +1,89 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
+using Ninject;
 using System.Diagnostics;
-using System.Windows.Forms;
-using System.Linq;
-using System.Xml.Linq;
+using System.IO;
+
 namespace UnScripter
 {
-	public class ExternalMenu
-	{
+    class ExternalMenu
+    {
+        private ProjectManager projectManager;
 
-		public void UnrealEditorToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-		{
-			Process proc = new Process();
-			ProcessStartInfo startinfo = new ProcessStartInfo();
-			startinfo.FileName = Globals.CurrentProject.ProjectFolder + "\\Binaries\\UDKLift.exe";
-			startinfo.Arguments = "editor";
-			startinfo.WorkingDirectory = Globals.CurrentProject.ProjectFolder + "\\Binaries\\";
-			proc.StartInfo = startinfo;
-			proc.Start();
-		}
+        [Inject]
+        public ExternalMenu(ProjectManager projectManager)
+        {
+            this.projectManager = projectManager;
+        }
 
-		public void UnrealLocalizerToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-		{
-			Process proc = new Process();
-			ProcessStartInfo startinfo = new ProcessStartInfo();
-			startinfo.FileName = Globals.CurrentProject.ProjectFolder + "\\Binaries\\UnrealLoc.exe";
-			startinfo.WorkingDirectory = Globals.CurrentProject.ProjectFolder + "\\Binaries\\";
-			proc.StartInfo = startinfo;
-			proc.Start();
-		}
+        public void UnrealEditorToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        {
+            Process proc = new Process();
+            ProcessStartInfo startinfo = new ProcessStartInfo();
+            startinfo.FileName = projectManager.CurrentProject.ProjectFolder + "\\Binaries\\UDKLift.exe";
+            startinfo.Arguments = "editor";
+            startinfo.WorkingDirectory = projectManager.CurrentProject.ProjectFolder + "\\Binaries\\";
+            proc.StartInfo = startinfo;
+            proc.Start();
+        }
 
-		public void UnrealFrontendToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-		{
-			Process proc = new Process();
-			ProcessStartInfo startinfo = new ProcessStartInfo();
-			startinfo.FileName = Globals.CurrentProject.ProjectFolder + "\\Binaries\\UnrealFrontend.exe";
-			startinfo.WorkingDirectory = Globals.CurrentProject.ProjectFolder + "\\Binaries\\";
-			proc.StartInfo = startinfo;
-			proc.Start();
-		}
+        public void UnrealLocalizerToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        {
+            Process proc = new Process();
+            ProcessStartInfo startinfo = new ProcessStartInfo();
+            startinfo.FileName = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries", "UnrealLoc.exe");
+            startinfo.WorkingDirectory = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries");
+            proc.StartInfo = startinfo;
+            proc.Start();
+        }
 
-		public void OpenConfigFolderToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-		{
-			Process proc = new Process();
-			ProcessStartInfo startinfo = new ProcessStartInfo();
-			startinfo.FileName = Globals.kDefaultExplorer;
-			startinfo.Arguments = Globals.CurrentProject.ProjectFolder + "UDKGame\\Config";
-			proc.StartInfo = startinfo;
-			proc.Start();
-		}
+        public void UnrealFrontendToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        {
+            Process proc = new Process();
+            ProcessStartInfo startinfo = new ProcessStartInfo();
+            startinfo.FileName = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries", "UnrealFrontend.exe");
+            startinfo.WorkingDirectory = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries");
+            proc.StartInfo = startinfo;
+            proc.Start();
+        }
 
-		public void OpenExplorerToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-		{
-			Process proc = new Process();
-			ProcessStartInfo startinfo = new ProcessStartInfo();
-			startinfo.FileName = Globals.kDefaultExplorer;
-			startinfo.Arguments = Globals.CurrentProject.DevelopmentFolder;
-			proc.StartInfo = startinfo;
-			proc.Start();
-		}
+        public void OpenConfigFolderToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        {
+            Process proc = new Process();
+            ProcessStartInfo startinfo = new ProcessStartInfo();
+            startinfo.FileName = Globals.kDefaultExplorer;
+            startinfo.Arguments = Path.Combine(projectManager.CurrentProject.ProjectFolder, "UDKGame", "Config");
+            proc.StartInfo = startinfo;
+            proc.Start();
+        }
 
-		public void OpenTerminalToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-		{
-			Process proc = new Process();
-			ProcessStartInfo startinfo = new ProcessStartInfo();
-			string curdir = System.IO.Directory.GetCurrentDirectory();
-			startinfo.FileName = curdir + Globals.kDefaultTerminal;
+        public void OpenExplorerToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        {
+            Process proc = new Process();
+            ProcessStartInfo startinfo = new ProcessStartInfo();
+            startinfo.FileName = Globals.kDefaultExplorer;
+            startinfo.Arguments = projectManager.CurrentProject.DevelopmentFolder;
+            proc.StartInfo = startinfo;
+            proc.Start();
+        }
 
-			// Add in directories to the PATH
-			startinfo.Arguments = "\"" + curdir + "\"" + " " + "\"" + curdir + "\\scripts" + "\"";
-			if ((Globals.CurrentProject != null)) {
-				startinfo.Arguments += " " + "\"" + Globals.CurrentProject.ProjectFolder + "Binaries" + "\"";
-			}
+        public void OpenTerminalToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        {
+            Process proc = new Process();
+            ProcessStartInfo startinfo = new ProcessStartInfo();
+            string curdir = System.IO.Directory.GetCurrentDirectory();
+            startinfo.FileName = curdir + Globals.kDefaultTerminal;
 
-			startinfo.WorkingDirectory = Globals.CurrentProject.ProjectFolder;
+            // Add in directories to the PATH
+            startinfo.Arguments = "\"" + curdir + "\"" + " " + "\"" + curdir + "\\scripts" + "\"";
+            if (projectManager.CurrentProject != null)
+            {
+                startinfo.Arguments += " " + "\"" + projectManager.CurrentProject.ProjectFolder + "Binaries" + "\"";
+            }
 
-			proc.StartInfo = startinfo;
-			proc.Start();
-		}
+            startinfo.WorkingDirectory = projectManager.CurrentProject.ProjectFolder;
 
-	}
+            proc.StartInfo = startinfo;
+            proc.Start();
+        }
+
+    }
 }

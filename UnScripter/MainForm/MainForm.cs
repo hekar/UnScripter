@@ -1,15 +1,6 @@
-using Microsoft.VisualBasic;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Linq;
-using System.Xml.Linq;
-using UnScripter.Project;
 using Ninject;
+using System;
+using System.Windows.Forms;
 
 namespace UnScripter
 {
@@ -18,15 +9,16 @@ namespace UnScripter
     {
         // Context menu strip
         public TabContextMenu EditorTabMenuStrip { get; set; }
+        private readonly EditorTabManager editorTabManager;
+        private readonly ProjectManager projectManager;
 
-        // Manages editor tabs separately from the tab control
-        private EditorTabManager editorTabManager;
+        private FileMenu fileMenu;
+        private EditMenu editMenu;
+        private ExternalMenu externalMenu;
+        private ToolsMenu toolsMenu;
 
-        // Event handlers
-        //   Event handlers are manually set (not using the winforms designer)
-        //   for the reason of having better namespacing
-
-        private ProjectManager projectManager;
+        private ControlEvents controlEvents;
+        private BackgroundWorkers backgroundWorkers;
 
         [Inject]
         public MainForm(ProjectManager projectManager, MainFormDocks docks, EditorTabManager editorTabManager)
@@ -36,14 +28,13 @@ namespace UnScripter
             this.projectManager = projectManager;
             this.docks = docks;
             this.editorTabManager = editorTabManager;
+
             FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
         }
 
-        private FileMenu fileMenu;
         private void AddFileMenuHandlers()
         {
-            fileMenu = new FileMenu(this, projectManager, App.Kernel.Get<NewProjectForm>(), editorTabManager);
             // Set all the event handles for the "File->" menu
             this.FileToolStripMenuItem.DropDownOpening += fileMenu.FileMenu_DropDown;
 
@@ -59,10 +50,8 @@ namespace UnScripter
             this.ExitToolStripMenuItem.Click += fileMenu.ExitToolStripMenuItem_Click;
         }
 
-        private EditMenu editMenu;
         private void AddEditMenuHandlers()
         {
-            editMenu = new EditMenu(this, editorTabManager);
             this.EditToolStripMenuItem.DropDownOpening += editMenu.EditMenu_DropDown;
 
             this.UndoToolStripMenuItem.Click += editMenu.UndoToolStripMenuItem_Click;
@@ -94,11 +83,8 @@ namespace UnScripter
             this.ErrorNextToolStripMenuItem.Click += buildMenu.RunToolStripMenuItem_Click;
         }
 
-        private ExternalMenu externalMenu;
         private void AddExternalMenuHandlers()
         {
-            externalMenu = new ExternalMenu();
-
             this.UnrealEditorToolStripMenuItem.Click += externalMenu.UnrealEditorToolStripMenuItem_Click;
             this.UnrealLocalizerToolStripMenuItem.Click += externalMenu.UnrealLocalizerToolStripMenuItem_Click;
             this.UnrealFrontendToolStripMenuItem.Click += externalMenu.UnrealFrontendToolStripMenuItem_Click;
@@ -107,11 +93,8 @@ namespace UnScripter
             this.OpenTerminalToolStripMenuItem.Click += externalMenu.OpenTerminalToolStripMenuItem_Click;
         }
 
-        private ToolsMenu toolsMenu;
         private void AddToolsMenuHandlers()
         {
-            toolsMenu = new ToolsMenu(editorTabManager, App.Kernel.Get<OptionsDialog>());
-
             this.ShowResourcesToolStripMenuItem.Click += toolsMenu.ShowResourcesToolStripMenuItem_Click;
             this.PreferencesToolStripMenuItem.Click += toolsMenu.ShowOptions;
         }
@@ -154,11 +137,8 @@ namespace UnScripter
             this.ShowResDialogToolStripButton.Click += toolsMenu.ShowResourcesToolStripMenuItem_Click;
         }
 
-        private ControlEvents controlEvents;
         private void AddControlEvents()
         {
-            controlEvents = new ControlEvents(this, editorTabManager);
-
             // Add events handlers for controls inside of mainforms
             EditorTabs.KeyDown += controlEvents.EditorTabs_KeyDown;
             EditorTabs.MouseClick += controlEvents.EditorTabs_MouseClick;
@@ -168,11 +148,8 @@ namespace UnScripter
             FileView.NodeMouseDoubleClick += controlEvents.FileView_NodeMouseDoubleClick;
         }
 
-        private BackgroundWorkers backgroundWorkers;
         private void AddBackgroundWorkers()
         {
-            backgroundWorkers = new BackgroundWorkers(this);
-
             this.BuildWorker.DoWork += backgroundWorkers.BuildWorker_DoWork;
             this.BuildWorker.RunWorkerCompleted += backgroundWorkers.BuildWorker_RunWorkerCompleted;
             this.UnrealParserWorker.DoWork += backgroundWorkers.UnrealParserWorker_DoWork;
@@ -212,6 +189,16 @@ namespace UnScripter
                 Globals.EditorSettings.ImmediateWrite = true;
                 Globals.UISettings.ImmediateWrite = true;
 
+                fileMenu = new FileMenu(this, projectManager, App.Kernel.Get<NewProjectForm>(), editorTabManager, App.Kernel.Get<ProjectNewFileDialog>());
+                editMenu = new EditMenu(this, editorTabManager, projectManager);
+                toolsMenu = new ToolsMenu(projectManager, editorTabManager,
+                    App.Kernel.Get<OptionsDialog>(), App.Kernel.Get<ResourceDialog>());
+                this.externalMenu = new ExternalMenu(projectManager);
+
+                backgroundWorkers = new BackgroundWorkers(this, projectManager);
+                controlEvents = new ControlEvents(this, editorTabManager, projectManager);
+
+
                 // TODO: Fix
                 editorTabManager.Tabs = EditorTabs;
                 EditorTabMenuStrip = new TabContextMenu(editorTabManager);
@@ -223,7 +210,7 @@ namespace UnScripter
                 var lastproject = Globals.Settings.GetTrait("LastProjectPath");
                 if (System.IO.File.Exists(lastproject))
                 {
-                    Globals.CurrentProject = projectManager.OpenProject(lastproject);
+                    projectManager.CurrentProject = projectManager.OpenProject(lastproject);
                 }
 
                 // TODO: Move somewhere else...

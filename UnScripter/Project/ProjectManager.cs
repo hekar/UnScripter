@@ -1,10 +1,22 @@
 using Ninject;
+using UnScripter.Project;
 
 namespace UnScripter
 {
     // Singleton for dealing with Projects
     class ProjectManager
     {
+        private Project.Project _currentproject;
+        public Project.Project CurrentProject
+        {
+            get { return _currentproject; }
+            set
+            {
+                _currentproject = value;
+                ChangeProject(_currentproject);
+            }
+        }
+
         [Inject]
         public ProjectManager()
         {
@@ -12,7 +24,7 @@ namespace UnScripter
 
         public bool ProjectOpen
         {
-            get { return (Globals.CurrentProject != null); }
+            get { return (CurrentProject != null); }
         }
 
         public void ChangeProject(Project.Project newproject)

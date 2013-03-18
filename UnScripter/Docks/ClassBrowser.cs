@@ -37,7 +37,7 @@ namespace UnScripter
         {
             if (projectManager.ProjectOpen)
             {
-                var curproj = Globals.CurrentProject;
+                var curproj = projectManager.CurrentProject;
                 if (SelectedNode.Parent == null)
                 {
                     // We clicked a class

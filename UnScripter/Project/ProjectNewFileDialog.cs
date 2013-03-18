@@ -1,14 +1,19 @@
+using Ninject;
 using System;
 using System.IO;
 using System.Windows.Forms;
 
 namespace UnScripter
 {
-    public partial class ProjectNewFileDialog
+    partial class ProjectNewFileDialog
     {
-        public ProjectNewFileDialog()
+        private ProjectManager projectManager;
+
+        [Inject]
+        public ProjectNewFileDialog(ProjectManager projectManager)
         {
             InitializeComponent();
+            this.projectManager = projectManager;
         }
 
         private void ProjectNewFileDialog_Shown(Object sender, System.EventArgs e)
@@ -19,7 +24,7 @@ namespace UnScripter
             ComboBoxProjectFolder.Items.Clear();
 
             // Tally up project folders
-            var curproj = Globals.CurrentProject;
+            var curproj = projectManager.CurrentProject;
             foreach (var folder in curproj.FileList.ProjectFolders)
             {
                 if (folder.FullName.ToLower().EndsWith("classes"))
@@ -36,7 +41,7 @@ namespace UnScripter
 
         private void OK_Button_Click(Object sender, System.EventArgs e)
         {
-            var curproj = Globals.CurrentProject;
+            var curproj = projectManager.CurrentProject;
 
             // Create the new project file
             var writer = File.CreateText(curproj.DevelopmentFolder + ComboBoxProjectFolder.Text + 
@@ -49,7 +54,7 @@ namespace UnScripter
                 writer.Close();
 
                 // Add file to project view
-                Globals.CurrentProject.FileList.RefreshDirectories();
+                projectManager.CurrentProject.FileList.RefreshDirectories();
 
                 // Return the dialog result
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;

@@ -1,14 +1,7 @@
-using Microsoft.VisualBasic;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.Linq;
-using System.Xml.Linq;
 using System.IO;
+using System.Windows.Forms;
+
 namespace UnScripter
 {
 
@@ -21,11 +14,13 @@ namespace UnScripter
         private ProjectFolderContextMenu ProjectFolderMenuStrip { get; set; }
         private MainForm mainForm;
         private EditorTabManager editorTabManager;
+        private ProjectManager projectManager;
 
-        public ControlEvents(MainForm mainForm, EditorTabManager editorTabManager)
+        public ControlEvents(MainForm mainForm, EditorTabManager editorTabManager, ProjectManager projectManager)
         {
             this.mainForm = mainForm;
             this.editorTabManager = editorTabManager;
+            this.projectManager = projectManager;
         }
 
         public void FileView_KeyDown(System.Object sender, System.Windows.Forms.KeyEventArgs e)
@@ -35,7 +30,7 @@ namespace UnScripter
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    var curproj = Globals.CurrentProject;
+                    var curproj = projectManager.CurrentProject;
                     string fullpath = curproj.NodeFullPathToFullName(selectednode.FullPath);
                     if (curproj.FileList.IsProjectFile(fullpath))
                     {
@@ -73,10 +68,10 @@ namespace UnScripter
         {
             TreeNode node = (TreeNode)mainForm.FileView.GetNodeAt(e.Location);
             mainForm.FileView.SelectedNode = node;
-            string fullpath = Globals.CurrentProject.NodeFullPathToFullName(node.FullPath);
-            fullpath = fullpath.Replace(Globals.CurrentProject.ProjectName + "\\", "");
+            string fullpath = projectManager.CurrentProject.NodeFullPathToFullName(node.FullPath);
+            fullpath = fullpath.Replace(projectManager.CurrentProject.ProjectName + "\\", "");
 
-            var curproj = Globals.CurrentProject;
+            var curproj = projectManager.CurrentProject;
 
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
@@ -101,18 +96,20 @@ namespace UnScripter
                 // Open the context menu
                 if (curproj.FileList.IsProjectFile(fullpath))
                 {
-                    ProjectFileMenuStrip.ClickedProjectFile = Globals.CurrentProject.FileList.GetProjectFile(fullpath);
+                    ProjectFileMenuStrip.ClickedProjectFile = projectManager.CurrentProject.FileList.GetProjectFile(fullpath);
 
-                    var location = new System.Drawing.Point(e.Location.X, e.Location.Y + Convert.ToInt32(ProjectFileMenuStrip.Height / 2) + Convert.ToInt32(ProjectFileMenuStrip.Items[0].Height * 1.5));
+                    var location = new System.Drawing.Point(e.Location.X, e.Location.Y + Convert.ToInt32(ProjectFileMenuStrip.Height / 2) +
+                        Convert.ToInt32(ProjectFileMenuStrip.Items[0].Height * 1.5));
 
                     ProjectFileMenuStrip.Show(location);
                 }
                 else if (curproj.FileList.IsProjectFolder(fullpath))
                 {
                     // Do a project folder context strip
-                    ProjectFolderMenuStrip.ClickedProjectFolder = Globals.CurrentProject.FileList.GetProjectFolder(fullpath);
+                    ProjectFolderMenuStrip.ClickedProjectFolder = projectManager.CurrentProject.FileList.GetProjectFolder(fullpath);
 
-                    var location = new System.Drawing.Point(e.Location.X, e.Location.Y + Convert.ToInt32(ProjectFileMenuStrip.Height / 2) + Convert.ToInt32(ProjectFileMenuStrip.Items[0].Height * 1.5));
+                    var location = new System.Drawing.Point(e.Location.X, e.Location.Y + Convert.ToInt32(ProjectFileMenuStrip.Height / 2) +
+                        Convert.ToInt32(ProjectFileMenuStrip.Items[0].Height * 1.5));
 
                     ProjectFolderMenuStrip.Show(location);
                 }
@@ -125,7 +122,8 @@ namespace UnScripter
 
         public void FileView_NodeMouseDoubleClick(System.Object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
         {
-            var profilename = Globals.CurrentProject.DevelopmentFolder + mainForm.FileView.SelectedNode.FullPath.Replace(Globals.CurrentProject.ProjectName + "\\", "");
+            var profilename = projectManager.CurrentProject.DevelopmentFolder +
+                mainForm.FileView.SelectedNode.FullPath.Replace(projectManager.CurrentProject.ProjectName + "\\", "");
             Project.ProjectFile projectfile = new Project.ProjectFile(profilename);
             FileInfo fileinfo = new FileInfo(projectfile.FullName);
             if (fileinfo.Exists && !(fileinfo.Attributes == FileAttributes.Directory))
