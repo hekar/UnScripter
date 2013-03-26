@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using UnScripterPlugin.Plugin;
+using UnScripterPlugin.Project;
 
 namespace UnScripter.Plugin
 {
     /// <summary>
-    /// Handle loading plugins
+    /// Central plugin loader. Loads external assemblies from specified plugin directory
     /// </summary>
     class PluginLoader
     {
@@ -34,5 +34,15 @@ namespace UnScripter.Plugin
             return plugins.ToList();
         }
 
+        /// <summary>
+        /// List all the plugins that a specific project utilizes
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
+        public List<UsPlugin> ListPlugins(UsProject project)
+        {
+            // TODO: Get referenced plugins from project XML
+            throw new NotImplementedException();
+        }
     }
 }

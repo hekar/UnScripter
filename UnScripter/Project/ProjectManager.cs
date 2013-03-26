@@ -1,25 +1,28 @@
 using Ninject;
-using UnScripter.Project;
+using UnScripterPlugin.Project;
 
 namespace UnScripter
 {
     // Singleton for dealing with Projects
     class ProjectManager
     {
-        private Project.Project _currentproject;
-        public Project.Project CurrentProject
+        private GlobalSettings globalSettings;
+
+        private UnScripterPlugin.Project.UsProject currentproject;
+        public UnScripterPlugin.Project.UsProject CurrentProject
         {
-            get { return _currentproject; }
+            get { return currentproject; }
             set
             {
-                _currentproject = value;
-                ChangeProject(_currentproject);
+                currentproject = value;
+                ChangeProject(currentproject);
             }
         }
 
         [Inject]
-        public ProjectManager()
+        public ProjectManager(GlobalSettings globalSettings)
         {
+            this.globalSettings = globalSettings;
         }
 
         public bool ProjectOpen
@@ -27,7 +30,7 @@ namespace UnScripter
             get { return (CurrentProject != null); }
         }
 
-        public void ChangeProject(Project.Project newproject)
+        public void ChangeProject(UnScripterPlugin.Project.UsProject newproject)
         {
             // Clear all the old files from the fileview
             //mainForm.FileView.Nodes.Clear();
@@ -36,10 +39,10 @@ namespace UnScripter
             var newProjectFileName = newproject.ProjectFileName;
             var newDevelopmentFolder = newproject.DevelopmentFolder;
             var newFileList = newproject.FileList;
-            var newFileTreeView = newproject.FileTreeView;
+            //var newFileTreeView = newproject.FileTreeView;
 
             // Are we using a tree format or a straight list
-            if (Globals.kUseFileTree)
+            if (Globals.UseFileTree)
             {
                 //newFileTreeView = new ProjectFileTree(newProjectName, mainForm.FileView, newDevelopmentFolder, Globals.kProjectFileRegex);
             }
@@ -51,7 +54,7 @@ namespace UnScripter
                 //}
             }
 
-            Globals.Settings.SetTrait("LastProjectPath", newProjectFileName);
+            globalSettings.SetTrait("LastProjectPath", newProjectFileName);
             //mainForm.FileStatusLabel.Text = "Opened Project " + newProjectName;
 
             //mainForm.StartParser();
@@ -59,12 +62,12 @@ namespace UnScripter
             //newFileTreeView.ExpandDefaultFolders();
         }
 
-        public Project.Project CreateProject(string name, string path)
+        public UnScripterPlugin.Project.UsProject CreateProject(string name, string path)
         {
-            return new Project.Project(name, path, Globals.kProjectFileRegex);
+            return new Project.UnScripterProject(name, path, Globals.ProjectFileRegex);
         }
 
-        public Project.Project OpenProject(string path)
+        public UnScripterPlugin.Project.UsProject OpenProject(string path)
         {
             return OpenProject(path);
         }

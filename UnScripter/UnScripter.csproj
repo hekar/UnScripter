@@ -91,148 +91,141 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Build\Compile.cs" />
-    <Compile Include="Build\CompileError.cs" />
-    <Compile Include="Build\Run.cs" />
-    <Compile Include="Docks\BaseDock.cs">
+    <Compile Include="Plugin\Implementations\CompileProvider.cs" />
+    <Compile Include="Plugin\Implementations\RunProvider.cs" />
+    <Compile Include="Project\UnScripterProject.cs" />
+    <Compile Include="Ui\Docks\BaseDock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Docks\ClassBrowser.cs">
+    <Compile Include="Ui\Docks\ClassBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Docks\ClassBrowserDock.cs">
+    <Compile Include="Ui\Docks\ClassBrowserDock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Docks\ConsoleOutput.cs">
+    <Compile Include="Ui\Docks\ConsoleOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Docks\ConsoleOutput.Designer.cs">
+    <Compile Include="Ui\Docks\ConsoleOutput.Designer.cs">
       <DependentUpon>ConsoleOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Docks\ConsoleOutputDock.cs">
+    <Compile Include="Ui\Docks\ConsoleOutputDock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Docks\DockSettings.cs" />
-    <Compile Include="Docks\EditorTabDock.cs">
+    <Compile Include="Ui\Docks\DockSettings.cs" />
+    <Compile Include="Ui\Docks\EditorTabDock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Docks\EditorTabs.cs">
+    <Compile Include="Ui\Docks\EditorTabs.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Docks\ErrorView.cs">
+    <Compile Include="Ui\Docks\ErrorView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Docks\ErrorView.Designer.cs">
+    <Compile Include="Ui\Docks\ErrorView.Designer.cs">
       <DependentUpon>ErrorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Docks\ErrorViewDock.cs">
+    <Compile Include="Ui\Docks\ErrorViewDock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Docks\FileView.cs">
+    <Compile Include="Ui\Docks\FileView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Docks\FileViewDock.cs">
+    <Compile Include="Ui\Docks\FileViewDock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editor\EditorTabManager.cs" />
-    <Compile Include="Editor\EditorTabPage.cs">
+    <Compile Include="Ui\Editor\EditorTabManager.cs" />
+    <Compile Include="Ui\Editor\EditorTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Editor\ScintillaEditor.cs">
+    <Compile Include="Ui\Editor\ScintillaEditor.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Editor\TabContextMenu.cs">
+    <Compile Include="Ui\Editor\TabContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Globals\Globals.cs" />
-    <Compile Include="MainForm\MainForm.cs">
+    <Compile Include="Ui\MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\MainForm.Designer.cs">
+    <Compile Include="Ui\MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\MainFormDocks.cs" />
-    <Compile Include="MainForm\AboutMenu.cs" />
-    <Compile Include="MainForm\BackgroundWorkers.cs" />
-    <Compile Include="MainForm\BuildMenu.cs" />
-    <Compile Include="MainForm\ControlEvents.cs" />
-    <Compile Include="MainForm\EditMenu.cs" />
-    <Compile Include="MainForm\ExternalMenu.cs" />
-    <Compile Include="MainForm\FileMenu.cs" />
-    <Compile Include="MainForm\ToolsMenu.cs" />
-    <Compile Include="MainForm\WindowsMenu.cs" />
-    <Compile Include="Misc\AboutBox.cs">
+    <Compile Include="Ui\MainForm\MainFormDocks.cs" />
+    <Compile Include="Ui\MainForm\AboutMenu.cs" />
+    <Compile Include="Ui\MainForm\BackgroundWorkers.cs" />
+    <Compile Include="Ui\MainForm\BuildMenu.cs" />
+    <Compile Include="Ui\MainForm\ControlEvents.cs" />
+    <Compile Include="Ui\MainForm\EditMenu.cs" />
+    <Compile Include="Ui\MainForm\ExternalMenu.cs" />
+    <Compile Include="Ui\MainForm\FileMenu.cs" />
+    <Compile Include="Ui\MainForm\ToolsMenu.cs" />
+    <Compile Include="Ui\MainForm\WindowsMenu.cs" />
+    <Compile Include="Ui\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Misc\AboutBox.Designer.cs">
+    <Compile Include="Ui\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Misc\CommandLibrary.cs" />
-    <Compile Include="Misc\FindInFilesDialog_TODO.cs">
+    <Compile Include="Ui\FindInFilesDialog_TODO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Misc\FindInFilesDialog_TODO.Designer.cs">
+    <Compile Include="Ui\FindInFilesDialog_TODO.Designer.cs">
       <DependentUpon>FindInFilesDialog_TODO.cs</DependentUpon>
     </Compile>
-    <Compile Include="Misc\FindInFiles_TODO.cs" />
-    <Compile Include="Misc\ResourceDialog.cs">
+    <Compile Include="Ui\ResourceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Misc\ResourceDialog.Designer.cs">
+    <Compile Include="Ui\ResourceDialog.Designer.cs">
       <DependentUpon>ResourceDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Misc\Settings.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Ninject\MainModule.cs" />
-    <Compile Include="OptionPages\EditorOptionPage.cs">
+    <Compile Include="Ui\OptionPages\EditorOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="OptionPages\EditorThemeOptionPage.cs">
+    <Compile Include="Ui\OptionPages\EditorThemeOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="OptionPages\FileViewOptionsPage.cs">
+    <Compile Include="Ui\OptionPages\FileViewOptionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="OptionPages\OptionPage.cs">
+    <Compile Include="Ui\OptionPages\OptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="OptionPages\OptionsDialog.cs">
+    <Compile Include="Ui\OptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OptionPages\OptionsDialog.Designer.cs">
+    <Compile Include="Ui\OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin\PluginLoader.cs" />
-    <Compile Include="Project\NewProjectForm.cs">
+    <Compile Include="Ui\NewProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\NewProjectForm.Designer.cs">
+    <Compile Include="Ui\NewProjectForm.Designer.cs">
       <DependentUpon>NewProjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Project\Project.cs" />
-    <Compile Include="Project\ProjectFile.cs" />
-    <Compile Include="Project\ProjectFileContextMenu.cs">
+    <Compile Include="Project\ProjectContainer.cs" />
+    <Compile Include="Ui\Project\ProjectFileContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Project\ProjectFileList.cs" />
-    <Compile Include="Project\ProjectFilePropertiesForm.cs">
+    <Compile Include="Ui\Project\ProjectFilePropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\ProjectFilePropertiesForm.Designer.cs">
+    <Compile Include="Ui\Project\ProjectFilePropertiesForm.Designer.cs">
       <DependentUpon>ProjectFilePropertiesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\ProjectFileTree.cs" />
-    <Compile Include="Project\ProjectFolder.cs" />
-    <Compile Include="Project\ProjectFolderContextMenu.cs">
+    <Compile Include="Ui\Project\ProjectFolderContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Project\ProjectManager.cs" />
-    <Compile Include="Project\ProjectNewFileDialog.cs">
+    <Compile Include="Ui\Project\ProjectNewFileDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Project\ProjectNewFileDialog.Designer.cs">
+    <Compile Include="Ui\Project\ProjectNewFileDialog.Designer.cs">
       <DependentUpon>ProjectNewFileDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -240,9 +233,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UnrealScript\UnrealClass.cs" />
-    <Compile Include="UnrealScript\UnrealFunction.cs" />
-    <Compile Include="UnrealScript\UnrealVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -257,52 +247,52 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Docks\ConsoleOutput.resx">
+    <EmbeddedResource Include="Ui\Docks\ConsoleOutput.resx">
       <DependentUpon>ConsoleOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Docks\ErrorView.resx">
+    <EmbeddedResource Include="Ui\Docks\ErrorView.resx">
       <DependentUpon>ErrorView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Docks\ErrorViewDock.resx">
+    <EmbeddedResource Include="Ui\Docks\ErrorViewDock.resx">
       <DependentUpon>ErrorViewDock.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Docks\FileView.resx">
+    <EmbeddedResource Include="Ui\Docks\FileView.resx">
       <DependentUpon>FileView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor\ScintillaEditor.resx">
+    <EmbeddedResource Include="Ui\Editor\ScintillaEditor.resx">
       <DependentUpon>ScintillaEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\MainForm.resx">
+    <EmbeddedResource Include="Ui\MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Misc\AboutBox.resx">
+    <EmbeddedResource Include="Ui\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Misc\ResourceDialog.resx">
+    <EmbeddedResource Include="Ui\ResourceDialog.resx">
       <DependentUpon>ResourceDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionPages\EditorOptionPage.resx">
+    <EmbeddedResource Include="Ui\OptionPages\EditorOptionPage.resx">
       <DependentUpon>EditorOptionPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionPages\EditorThemeOptionPage.resx">
+    <EmbeddedResource Include="Ui\OptionPages\EditorThemeOptionPage.resx">
       <DependentUpon>EditorThemeOptionPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionPages\FileViewOptionsPage.resx">
+    <EmbeddedResource Include="Ui\OptionPages\FileViewOptionsPage.resx">
       <DependentUpon>FileViewOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionPages\OptionPage.resx">
+    <EmbeddedResource Include="Ui\OptionPages\OptionPage.resx">
       <DependentUpon>OptionPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OptionPages\OptionsDialog.resx">
+    <EmbeddedResource Include="Ui\OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\NewProjectForm.resx">
+    <EmbeddedResource Include="Ui\NewProjectForm.resx">
       <DependentUpon>NewProjectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\ProjectFilePropertiesForm.resx">
+    <EmbeddedResource Include="Ui\Project\ProjectFilePropertiesForm.resx">
       <DependentUpon>ProjectFilePropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Project\ProjectNewFileDialog.resx">
+    <EmbeddedResource Include="Ui\Project\ProjectNewFileDialog.resx">
       <DependentUpon>ProjectNewFileDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -311,7 +301,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Editor\app.config" />
+    <None Include="app.config" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -389,10 +379,17 @@
     <Content Include="Resources\underconstruction.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UnrealScriptLib\UnrealScriptLib.csproj">
+      <Project>{a430d7fa-51da-4cdb-91b5-2d7455fa496c}</Project>
+      <Name>UnrealScriptLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnScripterPlugin\UnScripterPlugin.csproj">
       <Project>{aab93176-fa1d-4f27-ab44-7bc97bc624f0}</Project>
       <Name>UnScripterPlugin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Platform\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

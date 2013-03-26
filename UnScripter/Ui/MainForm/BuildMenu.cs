@@ -1,0 +1,73 @@
+using Ninject;
+using UnScripterPlugin.Build;
+
+namespace UnScripter
+{
+	class BuildMenu
+	{
+        private readonly MainForm mainForm;
+        private readonly ProjectManager projectManager;
+        private Compile compiler;
+        private Run run;
+
+        [Inject]
+        public BuildMenu(MainForm mainForm, ProjectManager projectManager, Compile compiler, Run run)
+        {
+            this.mainForm = mainForm;
+            this.projectManager = projectManager;
+            this.compiler = compiler;
+            this.run = run;
+        }
+
+		public void BuildMenu_DropDown(System.Object sender, System.EventArgs e)
+		{
+			mainForm.BuildAllToolStripMenuItem.Enabled = projectManager.ProjectOpen;
+			mainForm.BuildAndRunToolStripMenuItem.Enabled = projectManager.ProjectOpen;
+			mainForm.RunToolStripMenuItem.Enabled = projectManager.ProjectOpen;
+		}
+
+		public void BuildAllToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+		{
+			compiler.FullRebuild = false;
+			compiler.InitMake();
+			mainForm.BuildWorker.RunWorkerAsync();
+		}
+
+		public void BuildAndRunToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+		{
+			Globals.ExecuteStandaloneOnBuildFinished = true;
+			compiler.FullRebuild = false;
+
+			compiler.InitMake();
+			mainForm.BuildWorker.RunWorkerAsync();
+		}
+
+		public void BuildFullToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+		{
+			compiler.FullRebuild = true;
+			compiler.InitMake();
+
+			if (mainForm.BuildWorker.IsBusy) {
+				mainForm.BuildWorker.CancelAsync();
+			}
+
+			mainForm.BuildWorker.RunWorkerAsync();
+		}
+
+		public void RunToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+		{
+			run.RunStandalone(projectManager.CurrentProject);
+		}
+
+		public void ErrorPrevStripMenuItem_Click(System.Object sender, System.EventArgs e)
+		{
+			mainForm.ErrorView.PrevError();
+		}
+
+		public void ErrorNextStripMenuItem_Click(System.Object sender, System.EventArgs e)
+		{
+			mainForm.ErrorView.NextError();
+		}
+
+	}
+}

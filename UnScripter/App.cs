@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.ApplicationServices;
-using Microsoft.VisualBasic.CompilerServices;
-using Microsoft.VisualBasic.Devices;
 using Ninject;
+using System;
+using System.Windows.Forms;
 using UnScripter.Ninject;
 
 namespace UnScripter

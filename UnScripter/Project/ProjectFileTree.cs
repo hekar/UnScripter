@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using UnScripterPlugin.Project;
 
 namespace UnScripter.Project
 {

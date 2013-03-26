@@ -4,11 +4,6 @@
         <name>UnScripter</name>
     </assembly>
     <members>
-        <member name="T:UnScripter.Globals">
-            <summary>
-            TODO: kill this class with fire
-            </summary>
-        </member>
         <member name="F:UnScripter.MainForm.docks">
             <summary>
             TODO: Move
@@ -16,8 +11,15 @@
         </member>
         <member name="T:UnScripter.Plugin.PluginLoader">
             <summary>
-            Handle loading plugins
+            Central plugin loader. Loads external assemblies from specified plugin directory
             </summary>
+        </member>
+        <member name="M:UnScripter.Plugin.PluginLoader.ListPlugins(UnScripterPlugin.Project.UsProject)">
+            <summary>
+            List all the plugins that a specific project utilizes
+            </summary>
+            <param name="project"></param>
+            <returns></returns>
         </member>
         <member name="T:UnScripter.Properties.Resources">
             <summary>
