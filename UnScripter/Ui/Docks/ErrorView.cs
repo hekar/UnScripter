@@ -6,6 +6,7 @@ using UnScripterPlugin.Project;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
     partial class ErrorView
     {
         private EditorTabManager editorTabManager;

@@ -6,6 +6,7 @@ using UnScripterPlugin.Project;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
 	class ProjectFolderContextMenu : ContextMenuStrip
 	{
         public ProjectFolder ClickedProjectFolder { get; set; }

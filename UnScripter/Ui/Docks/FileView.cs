@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace UnScripter
 {
-
+    [System.ComponentModel.DesignerCategory("")]
     public class FileView : TreeView
     {
         private IContainer components;

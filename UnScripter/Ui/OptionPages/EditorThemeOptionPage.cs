@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
     class EditorThemeOptionPage : OptionPage
     {
         private PictureBox ThemePreviewBox;

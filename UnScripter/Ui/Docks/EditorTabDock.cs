@@ -3,6 +3,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
     public class EditorTabDock : DockContent
     {
         public EditorTabs EditorTabs { get; set; }

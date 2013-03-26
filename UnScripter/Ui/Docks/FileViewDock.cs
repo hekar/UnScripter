@@ -4,7 +4,8 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace UnScripter
 {
-	public class FileViewDock : BaseDock
+    [System.ComponentModel.DesignerCategory("")]
+    public class FileViewDock : BaseDock
 	{
 		public FileView FileView { get; set; }
 

@@ -7,18 +7,18 @@ namespace UnScripter.Project
 {
     public class ProjectFileTree
     {
-        private TreeView _filetree;
+        private TreeView filetree;
 
-        private string _projectname;
+        private string projectName;
         public TreeView FileTree
         {
-            get { return _filetree; }
+            get { return filetree; }
         }
 
         public ProjectFileTree(string projectname, TreeView fileview, string folder, string regular_match = "")
         {
-            _filetree = fileview;
-            _projectname = projectname;
+            filetree = fileview;
+            projectName = projectname;
 
             ScanDirectory(folder, regular_match);
         }
@@ -32,8 +32,8 @@ namespace UnScripter.Project
             if ((lastnode == null))
             {
                 lastnode = new TreeNode(dir.Name);
-                _filetree.Nodes.Add(lastnode);
-                _filetree.TopNode = lastnode;
+                filetree.Nodes.Add(lastnode);
+                filetree.TopNode = lastnode;
             }
             else
             {
@@ -43,8 +43,8 @@ namespace UnScripter.Project
 
             if (lastnode.Text == "Src")
             {
-                lastnode.Name = _projectname;
-                lastnode.Text = _projectname;
+                lastnode.Name = projectName;
+                lastnode.Text = projectName;
                 lastnode.ImageIndex = 0;
             }
             else
@@ -79,12 +79,12 @@ namespace UnScripter.Project
         public void ExpandDefaultFolders()
         {
             // Collapse everything first
-            _filetree.Nodes[0].Collapse();
+            filetree.Nodes[0].Collapse();
 
             // Expand the Root Project Node
-            _filetree.Nodes[0].Expand();
+            filetree.Nodes[0].Expand();
 
-            foreach (TreeNode node in _filetree.Nodes)
+            foreach (TreeNode node in filetree.Nodes)
             {
                 foreach (TreeNode secondnode in node.Nodes)
                 {

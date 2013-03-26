@@ -5,6 +5,7 @@ using ScintillaNET.Configuration;
 using UnScripter.Project;
 using UnScripterPlugin.Project;
 
+[System.ComponentModel.DesignerCategory("")]
 class EditorTabPage : TabPage
 {
     private bool _firstchange = true;

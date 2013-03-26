@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
@@ -48,14 +51,18 @@
     <Compile Include="Build\Run.cs" />
     <Compile Include="ErrorReceiver.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Plugin\Job\Job.cs" />
+    <Compile Include="Plugin\Job\JobQueuer.cs" />
     <Compile Include="Plugin\Menu\MenuItem.cs" />
     <Compile Include="Plugin\Mod\Mod.cs" />
     <Compile Include="Plugin\PluginContext.cs" />
     <Compile Include="Plugin\UsPlugin.cs" />
-    <Compile Include="Project\Project.cs" />
+    <Compile Include="JsonProperties.cs" />
+    <Compile Include="Project\UsProject.cs" />
     <Compile Include="Project\ProjectFile.cs" />
     <Compile Include="Project\ProjectFileList.cs" />
     <Compile Include="Project\ProjectFolder.cs" />
+    <Compile Include="Project\UsProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

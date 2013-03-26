@@ -19,6 +19,9 @@ namespace UnScripter
         private EditMenu editMenu;
         private ExternalMenu externalMenu;
         private ToolsMenu toolsMenu;
+        private BuildMenu buildMenu;
+        private WindowsMenu windowsMenu;
+        private AboutMenu aboutMenu;
 
         private ControlEvents controlEvents;
         private BackgroundWorkers backgroundWorkers;
@@ -46,9 +49,9 @@ namespace UnScripter
             Load += MainForm_Load;
         }
 
-        private void AddFileMenuHandlers()
+        private void AddMenuHandlers()
         {
-            // Set all the event handles for the "File->" menu
+            // File menu
             this.FileToolStripMenuItem.DropDownOpening += fileMenu.FileMenu_DropDown;
 
             this.ProjectNewToolStripMenuItem.Click += fileMenu.ProjectNewToolStripMenuItem_Click;
@@ -61,10 +64,8 @@ namespace UnScripter
             this.PrintToolStripMenuItem.Click += fileMenu.PrintToolStripMenuItem_Click;
             this.PrintPreviewToolStripMenuItem.Click += fileMenu.PrintPreviewToolStripMenuItem_Click;
             this.ExitToolStripMenuItem.Click += fileMenu.ExitToolStripMenuItem_Click;
-        }
-
-        private void AddEditMenuHandlers()
-        {
+        
+            // Edit menu
             this.EditToolStripMenuItem.DropDownOpening += editMenu.EditMenu_DropDown;
 
             this.UndoToolStripMenuItem.Click += editMenu.UndoToolStripMenuItem_Click;
@@ -79,11 +80,8 @@ namespace UnScripter
             this.SelectAllToolStripMenuItem.Click += editMenu.SelectAllToolStripMenuItem_Click;
 
             this.GoToParentToolStripMenuItem.Click += editMenu.GotoParentClassToolStripMenuItem_Click;
-        }
-
-        private BuildMenu buildMenu;
-        private void AddBuildMenuHandlers()
-        {
+        
+            // Build menu
             buildMenu = new BuildMenu(this, projectManager, compiler, run);
 
             this.BuildToolStripMenuItem.DropDownOpening += buildMenu.BuildMenu_DropDown;
@@ -94,27 +92,20 @@ namespace UnScripter
             this.RebuildToolStripMenuItem.Click += buildMenu.BuildFullToolStripMenuItem_Click;
 
             this.ErrorNextToolStripMenuItem.Click += buildMenu.RunToolStripMenuItem_Click;
-        }
 
-        private void AddExternalMenuHandlers()
-        {
+            // Tool menus
             this.UnrealEditorToolStripMenuItem.Click += externalMenu.UnrealEditorToolStripMenuItem_Click;
             this.UnrealLocalizerToolStripMenuItem.Click += externalMenu.UnrealLocalizerToolStripMenuItem_Click;
             this.UnrealFrontendToolStripMenuItem.Click += externalMenu.UnrealFrontendToolStripMenuItem_Click;
             this.OpenConfigFolderToolStripMenuItem.Click += externalMenu.OpenConfigFolderToolStripMenuItem_Click;
             this.OpenExplorerToolStripMenuItem.Click += externalMenu.OpenExplorerToolStripMenuItem_Click;
             this.OpenTerminalToolStripMenuItem.Click += externalMenu.OpenTerminalToolStripMenuItem_Click;
-        }
-
-        private void AddToolsMenuHandlers()
-        {
+        
+            // Options menu
             this.ShowResourcesToolStripMenuItem.Click += toolsMenu.ShowResourcesToolStripMenuItem_Click;
             this.PreferencesToolStripMenuItem.Click += toolsMenu.ShowOptions;
-        }
 
-        private WindowsMenu windowsMenu;
-        private void AddWindowsMenuHandlers()
-        {
+            // Windows menu
             windowsMenu = new WindowsMenu(this, docks, editorTabManager);
 
             WindowsToolStripMenuItem.DropDownOpening += windowsMenu.WindowsToolStripMenuItem_DropDownOpened;
@@ -127,11 +118,8 @@ namespace UnScripter
             this.CloseToolStripMenuItem.Click += windowsMenu.Close;
             this.CloseOthersToolStripMenuItem.Click += windowsMenu.CloseOthers;
             this.CloseAllToolStripMenuItem.Click += windowsMenu.CloseAll;
-        }
 
-        private AboutMenu aboutMenu;
-        private void AddAboutMenuHandlers()
-        {
+            // About menu
             aboutMenu = new AboutMenu();
 
             this.AboutToolStripMenuItem.Click += aboutMenu.ShowAboutBox;
@@ -172,13 +160,7 @@ namespace UnScripter
         private void AddEventHandlers()
         {
             // Setup the event handlers
-            AddFileMenuHandlers();
-            AddEditMenuHandlers();
-            AddBuildMenuHandlers();
-            AddExternalMenuHandlers();
-            AddToolsMenuHandlers();
-            AddWindowsMenuHandlers();
-            AddAboutMenuHandlers();
+            AddMenuHandlers();
             AddToolStripHandlers();
             AddControlEvents();
             AddBackgroundWorkers();
@@ -238,7 +220,9 @@ namespace UnScripter
             docks.SaveDockSettings(DockPanel);
         }
 
-        // TODO: Move to globals
+        /// <summary>
+        /// TODO: Move elsewhere
+        /// </summary>
         public void StartParser()
         {
             ParserStatusLabel.Text = "Parsing UnrealScript...";
@@ -247,6 +231,7 @@ namespace UnScripter
             UnrealParserWorker.RunWorkerAsync();
         }
 
+        #region "Things that do not belong in this class"
         /// <summary>
         /// TODO: Move
         /// </summary>
@@ -293,40 +278,25 @@ namespace UnScripter
             }
         }
 
+        #endregion
+
+        #region "ErrorReceiver"
         public string BuildMessage
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return BuildMessageStatusLabel.Text; }
+            set { BuildMessageStatusLabel.Text = value; }
         }
 
         public bool ProgressVisible
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return ProgressBarStatusBar.Visible; }
+            set { ProgressBarStatusBar.Visible = value; }
         }
 
         public int ProgressValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return ProgressBarStatusBar.Value; }
+            set { ProgressBarStatusBar.Value = value; }
         }
 
         public void ClearErrors()
@@ -346,5 +316,6 @@ namespace UnScripter
             ErrorView.Add(new ListViewItem(columns, 0, Color.Black,
                     Color.LightYellow, new Font(FontFamily.GenericSerif, 10)));
         }
+        #endregion
     }
 }

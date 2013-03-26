@@ -8,8 +8,8 @@ namespace UnScripter
     {
         private GlobalSettings globalSettings;
 
-        private UnScripterPlugin.Project.UsProject currentproject;
-        public UnScripterPlugin.Project.UsProject CurrentProject
+        private UsProject currentproject;
+        public UsProject CurrentProject
         {
             get { return currentproject; }
             set
@@ -30,7 +30,7 @@ namespace UnScripter
             get { return (CurrentProject != null); }
         }
 
-        public void ChangeProject(UnScripterPlugin.Project.UsProject newproject)
+        public void ChangeProject(UsProject newproject)
         {
             // Clear all the old files from the fileview
             //mainForm.FileView.Nodes.Clear();
@@ -62,12 +62,12 @@ namespace UnScripter
             //newFileTreeView.ExpandDefaultFolders();
         }
 
-        public UnScripterPlugin.Project.UsProject CreateProject(string name, string path)
+        public UsProject CreateProject(string name, string path)
         {
             return new Project.UnScripterProject(name, path, Globals.ProjectFileRegex);
         }
 
-        public UnScripterPlugin.Project.UsProject OpenProject(string path)
+        public UsProject OpenProject(string path)
         {
             return OpenProject(path);
         }

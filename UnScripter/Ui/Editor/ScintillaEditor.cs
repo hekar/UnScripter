@@ -8,9 +8,9 @@ using System.Windows.Forms;
 namespace UnScripter
 {
 
-	public class ScintillaEditor : Scintilla
+    [System.ComponentModel.DesignerCategory("")]
+    public class ScintillaEditor : Scintilla
 	{
-
         // TODO: Inject this component
 		public ScintillaEditor()
 		{

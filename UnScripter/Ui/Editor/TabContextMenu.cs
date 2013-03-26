@@ -3,14 +3,13 @@ using System.Windows.Forms;
 
 namespace UnScripter
 {
-
-	class TabContextMenu : ContextMenuStrip
+    [System.ComponentModel.DesignerCategory("")]
+    class TabContextMenu : ContextMenuStrip
 	{
-
-		private EditorTabManager _editortabmanager;
+		private EditorTabManager editorTabManager;
 		public TabContextMenu(EditorTabManager editortabmanager)
 		{
-			_editortabmanager = editortabmanager;
+			this.editorTabManager = editortabmanager;
 			this.Items.Add("Close", null, CloseButton_Click);
 			this.Items.Add("Close Others", null, CloseOthersButton_Click);
 			this.Items.Add("Close All", null, CloseAllButton_Click);
@@ -21,27 +20,27 @@ namespace UnScripter
 
 		private void CloseButton_Click(object sender, EventArgs e)
 		{
-			_editortabmanager.CloseTab(_editortabmanager.TabClicked);
+			editorTabManager.CloseTab(editorTabManager.TabClicked);
 		}
 
 		private void CloseOthersButton_Click(object sender, EventArgs e)
 		{
-			_editortabmanager.CloseOthers(_editortabmanager.TabClicked);
+			editorTabManager.CloseOthers(editorTabManager.TabClicked);
 		}
 
 		private void OpenPathButton_Click(object sender, EventArgs e)
 		{
-			_editortabmanager.SelectedTabProjectFile.OpenPath();
+			editorTabManager.SelectedTabProjectFile.OpenPath();
 		}
 
 		private void OpenEditorButton_Click(object sender, EventArgs e)
 		{
-			_editortabmanager.SelectedTabProjectFile.OpenEditor();
+			editorTabManager.SelectedTabProjectFile.OpenEditor();
 		}
 
 		private void CloseAllButton_Click(object sender, EventArgs e)
 		{
-			_editortabmanager.CloseAll();
+			editorTabManager.CloseAll();
 		}
 
 	}

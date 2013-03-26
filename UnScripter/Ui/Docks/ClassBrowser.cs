@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
     class ClassView : TreeView
     {
         private readonly EditorTabManager editorTabManager;

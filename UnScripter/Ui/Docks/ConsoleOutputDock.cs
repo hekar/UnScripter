@@ -3,7 +3,8 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace UnScripter
 {
-	public class ConsoleOutputDock : BaseDock
+    [System.ComponentModel.DesignerCategory("")]
+    public class ConsoleOutputDock : BaseDock
 	{
 		public ConsoleOutput ConsoleOutput { get; private set; }
 

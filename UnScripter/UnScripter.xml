@@ -4,9 +4,54 @@
         <name>UnScripter</name>
     </assembly>
     <members>
+        <member name="T:UnScripter.Plugin.PluginContainer">
+            <summary>
+            Flywheel between PluginLoader and 
+            </summary>
+        </member>
+        <member name="P:UnScripter.Project.UnScripterProject.FileTreeView">
+            <summary>
+            Winforms TreeView for the Project Explorer
+            </summary>
+        </member>
+        <member name="P:UnScripter.Project.UnScripterProject.Saved">
+            <summary>
+            Is the project saved?
+            </summary>
+        </member>
+        <member name="P:UnScripter.Project.UnScripterProject.FileList">
+            <summary>
+            Simple list of each file in the project
+            </summary>
+        </member>
+        <member name="P:UnScripter.Project.UnScripterProject.ProjectName">
+            <summary>
+            Name of the Project
+            </summary>
+        </member>
+        <member name="P:UnScripter.Project.UnScripterProject.ProjectFolder">
+            <summary>
+            Root folder of the Project (UDK Directory)
+            </summary>
+        </member>
+        <member name="P:UnScripter.Project.UnScripterProject.DevelopmentFolder">
+            <summary>
+            Folder containing actual Source Code (UnrealScript)
+            </summary>
+        </member>
+        <member name="M:UnScripter.MainForm.StartParser">
+            <summary>
+            TODO: Move elsewhere
+            </summary>
+        </member>
         <member name="F:UnScripter.MainForm.docks">
             <summary>
             TODO: Move
+            </summary>
+        </member>
+        <member name="T:UnScripter.OptionPage">
+            <summary>
+            Default page for adding to the options dialog
             </summary>
         </member>
         <member name="T:UnScripter.Plugin.PluginLoader">
@@ -14,12 +59,23 @@
             Central plugin loader. Loads external assemblies from specified plugin directory
             </summary>
         </member>
+        <member name="M:UnScripter.Plugin.PluginLoader.ListPlugins">
+            <summary>
+            Load and list all plugins that UnScripter has access to
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:UnScripter.Plugin.PluginLoader.ListPlugins(UnScripterPlugin.Project.UsProject)">
             <summary>
             List all the plugins that a specific project utilizes
             </summary>
             <param name="project"></param>
             <returns></returns>
+        </member>
+        <member name="T:UnScripter.ProjectFileContextMenu">
+            <summary>
+            Context menu to open up on right click of a file or folder in the project explorer
+            </summary>
         </member>
         <member name="T:UnScripter.Properties.Resources">
             <summary>

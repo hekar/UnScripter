@@ -4,11 +4,12 @@ using UnScripterPlugin.Project;
 
 namespace UnScripter
 {
-
-	// Context menu to open up on right click of a file or folder in the project explorer
-	class ProjectFileContextMenu : ContextMenuStrip
+	/// <summary>
+    /// Context menu to open up on right click of a file or folder in the project explorer
+	/// </summary>
+    [System.ComponentModel.DesignerCategory("")]
+    class ProjectFileContextMenu : ContextMenuStrip
 	{
-
 		public ProjectFileContextMenu()
 		{
 			Items.Add("Open Path", null, OpenPath_Clicked);

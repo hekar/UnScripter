@@ -4,6 +4,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
     class ErrorViewDock : BaseDock
     {
         public ErrorView ErrorView { get; set; }

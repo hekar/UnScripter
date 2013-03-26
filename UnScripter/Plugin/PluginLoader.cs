@@ -19,6 +19,10 @@ namespace UnScripter.Plugin
             this.directory = directory;
         }
 
+        /// <summary>
+        /// Load and list all plugins that UnScripter has access to
+        /// </summary>
+        /// <returns></returns>
         public List<UsPlugin> ListPlugins()
         {
             var files = Directory.GetFiles(directory)

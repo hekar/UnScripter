@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Ninject;
 
 namespace UnScripterPlugin.Plugin
 {
-    public class PluginContext
+    public interface PluginContext
     {
+        IKernel Kernel { get; }
 
     }
 }

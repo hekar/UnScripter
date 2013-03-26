@@ -16,14 +16,14 @@ namespace UnScripter
             this.BackButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.Panel1 = new System.Windows.Forms.Panel();
+            this.GameLabel = new System.Windows.Forms.Label();
+            this.gameComboBox = new System.Windows.Forms.ComboBox();
             this.LabelError = new System.Windows.Forms.Label();
             this.ProjectDirectoryLabel = new System.Windows.Forms.Label();
             this.TextBoxUDKDir = new System.Windows.Forms.TextBox();
             this.BrowseButton = new System.Windows.Forms.Button();
             this.TextBoxProjectName = new System.Windows.Forms.TextBox();
             this.ProjectNameLabel = new System.Windows.Forms.Label();
-            this.gameComboBox = new System.Windows.Forms.ComboBox();
-            this.GameLabel = new System.Windows.Forms.Label();
             this.Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,6 +82,24 @@ namespace UnScripter
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(392, 296);
             this.Panel1.TabIndex = 3;
+            // 
+            // GameLabel
+            // 
+            this.GameLabel.AutoSize = true;
+            this.GameLabel.Location = new System.Drawing.Point(14, 43);
+            this.GameLabel.Name = "GameLabel";
+            this.GameLabel.Size = new System.Drawing.Size(38, 13);
+            this.GameLabel.TabIndex = 8;
+            this.GameLabel.Text = "Game:";
+            // 
+            // gameComboBox
+            // 
+            this.gameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.gameComboBox.FormattingEnabled = true;
+            this.gameComboBox.Location = new System.Drawing.Point(106, 40);
+            this.gameComboBox.Name = "gameComboBox";
+            this.gameComboBox.Size = new System.Drawing.Size(208, 21);
+            this.gameComboBox.TabIndex = 7;
             // 
             // LabelError
             // 
@@ -144,23 +162,6 @@ namespace UnScripter
             this.ProjectNameLabel.Size = new System.Drawing.Size(74, 13);
             this.ProjectNameLabel.TabIndex = 0;
             this.ProjectNameLabel.Text = "Project Name:";
-            // 
-            // gameComboBox
-            // 
-            this.gameComboBox.FormattingEnabled = true;
-            this.gameComboBox.Location = new System.Drawing.Point(106, 40);
-            this.gameComboBox.Name = "gameComboBox";
-            this.gameComboBox.Size = new System.Drawing.Size(208, 21);
-            this.gameComboBox.TabIndex = 7;
-            // 
-            // GameLabel
-            // 
-            this.GameLabel.AutoSize = true;
-            this.GameLabel.Location = new System.Drawing.Point(14, 43);
-            this.GameLabel.Name = "GameLabel";
-            this.GameLabel.Size = new System.Drawing.Size(38, 13);
-            this.GameLabel.TabIndex = 8;
-            this.GameLabel.Text = "Game:";
             // 
             // NewProjectForm
             // 

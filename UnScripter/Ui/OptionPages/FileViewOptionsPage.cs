@@ -3,7 +3,8 @@ using System.Windows.Forms;
 
 namespace UnScripter
 {
-	class FileViewOptionsPage : OptionPage
+    [System.ComponentModel.DesignerCategory("")]
+    class FileViewOptionsPage : OptionPage
 	{
 		private RadioButton ExplorerModern;
 		private RadioButton ExplorerContemporary;

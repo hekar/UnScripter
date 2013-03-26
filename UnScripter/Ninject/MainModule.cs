@@ -20,9 +20,6 @@ namespace UnScripter.Ninject
             this.Bind<GlobalSettings>().ToConstant(new GlobalSettings("xml/global_settings.xml", "GlobalSettings"));
             this.Bind<EditorSettings>().ToConstant(new EditorSettings("xml/editor_settings.xml", "EditorSettings"));
             this.Bind<UiSettings>().ToConstant(new UiSettings("xml/ui_settings.xml", "UISettings"));
-
-            this.Bind<Compile>().To<CompileProvider>();
-            this.Bind<Run>().To<RunProvider>();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace UnScripter
 	class App
 	{
         // TODO: Make this non-global
-        public static readonly IKernel Kernel = new StandardKernel(new MainModule());
+        public static readonly IKernel Kernel = new StandardKernel(new MainModule(), new PluginModule());
 
 		[STAThread]
 		public static void Main(string[] args)

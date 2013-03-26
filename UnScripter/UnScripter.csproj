@@ -91,59 +91,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ninject\PluginModule.cs" />
     <Compile Include="Plugin\Implementations\CompileProvider.cs" />
     <Compile Include="Plugin\Implementations\RunProvider.cs" />
+    <Compile Include="Plugin\PluginContainer.cs" />
     <Compile Include="Project\UnScripterProject.cs" />
-    <Compile Include="Ui\Docks\BaseDock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ui\Docks\ClassBrowser.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\Docks\ClassBrowserDock.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Ui\Docks\BaseDock.cs" />
+    <Compile Include="Ui\Docks\ClassBrowser.cs" />
+    <Compile Include="Ui\Docks\ClassBrowserDock.cs" />
     <Compile Include="Ui\Docks\ConsoleOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Ui\Docks\ConsoleOutput.Designer.cs">
       <DependentUpon>ConsoleOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Docks\ConsoleOutputDock.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Ui\Docks\ConsoleOutputDock.cs" />
     <Compile Include="Ui\Docks\DockSettings.cs" />
-    <Compile Include="Ui\Docks\EditorTabDock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ui\Docks\EditorTabs.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\Docks\ErrorView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Ui\Docks\EditorTabDock.cs" />
+    <Compile Include="Ui\Docks\EditorTabs.cs" />
+    <Compile Include="Ui\Docks\ErrorView.cs" />
     <Compile Include="Ui\Docks\ErrorView.Designer.cs">
       <DependentUpon>ErrorView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Docks\ErrorViewDock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ui\Docks\FileView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\Docks\FileViewDock.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Ui\Docks\ErrorViewDock.cs" />
+    <Compile Include="Ui\Docks\FileView.cs" />
+    <Compile Include="Ui\Docks\FileViewDock.cs" />
     <Compile Include="Ui\Editor\EditorTabManager.cs" />
-    <Compile Include="Ui\Editor\EditorTabPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\Editor\ScintillaEditor.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\Editor\TabContextMenu.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Ui\Editor\EditorTabPage.cs" />
+    <Compile Include="Ui\Editor\ScintillaEditor.cs" />
+    <Compile Include="Ui\Editor\TabContextMenu.cs" />
     <Compile Include="Ui\MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,12 +143,6 @@
     <Compile Include="Ui\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ui\FindInFilesDialog_TODO.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ui\FindInFilesDialog_TODO.Designer.cs">
-      <DependentUpon>FindInFilesDialog_TODO.cs</DependentUpon>
-    </Compile>
     <Compile Include="Ui\ResourceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,18 +152,10 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Ninject\MainModule.cs" />
-    <Compile Include="Ui\OptionPages\EditorOptionPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\OptionPages\EditorThemeOptionPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\OptionPages\FileViewOptionsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Ui\OptionPages\OptionPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Ui\OptionPages\EditorOptionPage.cs" />
+    <Compile Include="Ui\OptionPages\EditorThemeOptionPage.cs" />
+    <Compile Include="Ui\OptionPages\FileViewOptionsPage.cs" />
+    <Compile Include="Ui\OptionPages\OptionPage.cs" />
     <Compile Include="Ui\OptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,16 +163,14 @@
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin\PluginLoader.cs" />
-    <Compile Include="Ui\NewProjectForm.cs">
+    <Compile Include="Ui\Project\NewProjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ui\NewProjectForm.Designer.cs">
+    <Compile Include="Ui\Project\NewProjectForm.Designer.cs">
       <DependentUpon>NewProjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\ProjectContainer.cs" />
-    <Compile Include="Ui\Project\ProjectFileContextMenu.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Ui\Project\ProjectFileContextMenu.cs" />
     <Compile Include="Ui\Project\ProjectFilePropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,9 +178,7 @@
       <DependentUpon>ProjectFilePropertiesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Project\ProjectFileTree.cs" />
-    <Compile Include="Ui\Project\ProjectFolderContextMenu.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Ui\Project\ProjectFolderContextMenu.cs" />
     <Compile Include="Project\ProjectManager.cs" />
     <Compile Include="Ui\Project\ProjectNewFileDialog.cs">
       <SubType>Form</SubType>
@@ -286,7 +244,7 @@
     <EmbeddedResource Include="Ui\OptionsDialog.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ui\NewProjectForm.resx">
+    <EmbeddedResource Include="Ui\Project\NewProjectForm.resx">
       <DependentUpon>NewProjectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ui\Project\ProjectFilePropertiesForm.resx">
@@ -388,8 +346,6 @@
       <Name>UnScripterPlugin</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Platform\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>

@@ -2,6 +2,7 @@ using System.Windows.Forms;
 
 namespace UnScripter
 {
+    [System.ComponentModel.DesignerCategory("")]
 	public class EditorTabs : TabControl
 	{
 		public EditorTabs()

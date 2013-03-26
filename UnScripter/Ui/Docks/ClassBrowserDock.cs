@@ -3,7 +3,8 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace UnScripter
 {
-	class ClassBrowserDock : BaseDock
+    [System.ComponentModel.DesignerCategory("")]
+    class ClassBrowserDock : BaseDock
 	{
 		public ClassView ClassView { get; set; }
 
