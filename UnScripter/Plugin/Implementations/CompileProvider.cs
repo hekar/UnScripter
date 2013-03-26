@@ -1,58 +1,100 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnScripterPlugin.Build;
+using UnScripterPlugin.Project;
 
 namespace UnScripter.Plugin.Implementations
 {
     class CompileProvider : Compile
     {
+        private readonly ProjectManager projectManager;
+        private StubCompile compile;
+
+        public CompileProvider(ProjectManager projectManager)
+        {
+            this.projectManager = projectManager;
+
+            this.compile = new StubCompile();
+        }
+
         public bool FullRebuild
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return compile.FullRebuild; }
+            set { compile.FullRebuild = value; }
         }
 
         public string BuildOutput
         {
-            get { throw new NotImplementedException(); }
+            get { return compile.BuildOutput; }
         }
 
         public List<CompileError> Errors
         {
-            get { throw new NotImplementedException(); }
+            get { return compile.Errors; }
         }
 
         public List<CompileError> Warnings
         {
-            get { throw new NotImplementedException(); }
+            get { return compile.Warnings; }
         }
 
-        public void Make(UnScripterPlugin.Project.UsProject project)
+        public void Make(UsProject project)
         {
-            throw new NotImplementedException();
+            compile.Make(project);
         }
 
         public void InitMake()
         {
-            throw new NotImplementedException();
+            compile.InitMake();
         }
 
-        public void StartMake(UnScripterPlugin.Project.UsProject project)
+        public void StartMake(UsProject project)
         {
-            throw new NotImplementedException();
+            compile.StartMake(project);
         }
 
         public void EndMake()
         {
-            throw new NotImplementedException();
+            compile.EndMake();
+        }
+
+        private class StubCompile : Compile
+        {
+            public bool FullRebuild
+            {
+                get { return false; }
+                set { }
+            }
+
+            public string BuildOutput
+            {
+                get { return ""; }
+            }
+
+            public List<CompileError> Errors
+            {
+                get { return new List<CompileError>(); }
+            }
+
+            public List<CompileError> Warnings
+            {
+                get { return new List<CompileError>(); }
+            }
+
+            public void Make(UsProject project)
+            {
+            }
+
+            public void InitMake()
+            {
+            }
+
+            public void StartMake(UsProject project)
+            {
+            }
+
+            public void EndMake()
+            {
+            }
         }
     }
 }
