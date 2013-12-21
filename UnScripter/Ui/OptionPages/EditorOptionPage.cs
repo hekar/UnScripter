@@ -54,9 +54,7 @@ namespace UnScripter
             FlatTabs.Checked = flattab;
 
             bool linenumbers = editorSettings.GetTrait("LineNumbers", true);
-
             ShowLineNumbers.Checked = linenumbers;
-
         }
 
         private void InitializeComponent()

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnScripterPlugin.Build;
 
 namespace UnScripter.Plugin.Implementations
 {
-    class RunProvider : Run
+    class RunProvider
     {
         public void RunStandalone(UnScripterPlugin.Project.UsProject proj)
         {

@@ -51,10 +51,10 @@ namespace UnScripter.Project
             return DevelopmentFolder + fullpath.Replace(ProjectName + Path.DirectorySeparatorChar, "");
         }
 
-        public UnScripterProject(string name, string udkdir, string filebrowser_regex = Globals.ProjectFileRegex)
+        public UnScripterProject(string name, string udkDir, string browserRegex = Globals.ProjectFileRegex)
         {
             ProjectName = name;
-            ProjectFolder = udkdir;
+            ProjectFolder = udkDir;
 
             data = new UsProjectData();
 
@@ -68,7 +68,7 @@ namespace UnScripter.Project
             }
 
             // Create our list of project files
-            FileList = new ProjectFileList(this, DevelopmentFolder, filebrowser_regex);
+            FileList = new ProjectFileList(this, DevelopmentFolder, browserRegex);
         }
 
         public void AddFile(string folder, string filename)
@@ -86,9 +86,8 @@ namespace UnScripter.Project
         public void SaveProject()
         {
             // Save the Project to a XML file
-            var path = ProjectFolder + ProjectName + ".axproj";
+            var path = Path.Combine(ProjectFolder, ProjectName + ".axproj");
 
-            data.Properties.Add("First", ProjectName);
             data.Properties.Add("Name", ProjectName);
             data.Properties.Add("RootFolder", ProjectFolder);
 

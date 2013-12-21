@@ -139,11 +139,16 @@ namespace UnScripterPlugin.Project
             //_project.FileTreeView.ExpandDefaultFolders();
         }
 
-        public void ScanDirectory(string folder, string regular_match = "", bool recursive = true)
+        public void ScanDirectory(string folder, string fileMatch = "", bool recursive = true)
         {
-            Regex re = new Regex(regular_match);
+            Regex re = new Regex(fileMatch);
 
             DirectoryInfo dir = new DirectoryInfo(folder);
+            if (!dir.Exists)
+            {
+                dir.Create();
+            }
+
             _projectfolders.Add(new ProjectFolder(dir));
 
             foreach (var fileinfo in dir.GetFiles())
@@ -161,7 +166,7 @@ namespace UnScripterPlugin.Project
             {
                 foreach (var subdir in dir.GetDirectories())
                 {
-                    ScanDirectory(subdir.FullName, regular_match, recursive);
+                    ScanDirectory(subdir.FullName, fileMatch, recursive);
                 }
             }
         }

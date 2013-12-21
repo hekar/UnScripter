@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using UnrealScriptLib.Unreal;
-using UnScripterPlugin.Build;
 
 namespace UnScripter
 {
@@ -12,30 +11,25 @@ namespace UnScripter
     {
         private readonly MainForm mainForm;
         private readonly ProjectManager projectManager;
-        private Compile compiler;
-        private Run run;
 
         [Inject]
-        public BackgroundWorkers(MainForm mainForm, ProjectManager projectManager, Compile compiler, Run run)
+        public BackgroundWorkers(MainForm mainForm, ProjectManager projectManager)
         {
             this.mainForm = mainForm;
             this.projectManager = projectManager;
-            this.compiler = compiler;
-            this.run = run;
         }
 
         public void BuildWorker_DoWork(Object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            compiler.StartMake(projectManager.CurrentProject);
         }
 
         public void BuildWorker_ReportProgress(Object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            mainForm.ConsoleOutput.ConsoleText.Text = compiler.BuildOutput;
         }
 
         public void BuildWorker_RunWorkerCompleted(Object sender, RunWorkerCompletedEventArgs e)
         {
+#if false
             compiler.EndMake();
 
             mainForm.ProgressBarStatusBar.Visible = false;
@@ -62,6 +56,7 @@ namespace UnScripter
                 run.RunStandalone(projectManager.CurrentProject);
                 Globals.ExecuteStandaloneOnBuildFinished = false;
             }
+#endif
         }
 
         public void UnrealParserWorker_DoWork(Object sender, System.ComponentModel.DoWorkEventArgs e)

@@ -73,7 +73,7 @@
     </Reference>
     <Reference Include="ScintillaNet, Version=2.2.3581.19319, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\ScintillaNET.dll</HintPath>
+      <HintPath>..\scintillanet\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ninject\PluginModule.cs" />
+    <Compile Include="Plugin\Implementations\CompileError.cs" />
     <Compile Include="Plugin\Implementations\CompileProvider.cs" />
     <Compile Include="Plugin\Implementations\RunProvider.cs" />
     <Compile Include="Plugin\PluginContainer.cs" />
@@ -262,6 +263,9 @@
     <None Include="app.config" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Conf\plugins.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>

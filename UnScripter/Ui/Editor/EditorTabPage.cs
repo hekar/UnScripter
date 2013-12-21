@@ -8,55 +8,53 @@ using UnScripterPlugin.Project;
 [System.ComponentModel.DesignerCategory("")]
 class EditorTabPage : TabPage
 {
-    private bool _firstchange = true;
+    private bool firstchange = true;
     public EditorTabPage(string name, ProjectFile projectfile)
     {
-        _projectfile = projectfile;
+        this.projectfile = projectfile;
     }
 
-    private ProjectFile _projectfile;
+    private ProjectFile projectfile;
     public ProjectFile ProjectFile
     {
-        get { return _projectfile; }
+        get { return projectfile; }
     }
 
     // Return fullname of file open in tab
     public string FullName
     {
-        get { return _projectfile.FullName; }
+        get { return projectfile.FullName; }
     }
 
-    private Scintilla _scintila;
+    private Scintilla scintila;
     public Scintilla ScintillaEditor
     {
-        get { return _scintila; }
+        get { return scintila; }
     }
 
-    // TODO: Fix for C#
     public void OnControlAdded(object sender, EventArgs e)
     {
-        _scintila = (Scintilla)Controls[0];
+        scintila = (Scintilla)Controls[0];
     }
 
-    // TODO: Fix for C#
     public void OnEditorTextChanged()
     {
-        if (_firstchange)
+        if (firstchange)
         {
             // Do not change the fact that we haven't saved the file
-            _firstchange = false;
+            firstchange = false;
         }
         else
         {
-            _projectfilesaved = false;
+            projectfilesaved = false;
         }
     }
 
-    private bool _projectfilesaved = true;
+    private bool projectfilesaved = true;
     public bool ShouldCloseTab()
     {
 
-        if (!_projectfilesaved)
+        if (!projectfilesaved)
         {
             // Ask if really want to quit and if want to save project file
             var result = MessageBox.Show("Do you want to save before closing?", "Save File?", MessageBoxButtons.YesNoCancel);
@@ -87,8 +85,8 @@ class EditorTabPage : TabPage
 
     public void SaveFile()
     {
-        _projectfile.FileContents = _scintila.Text;
-        _projectfilesaved = true;
+        projectfile.FileContents = scintila.Text;
+        projectfilesaved = true;
     }
 
     public DialogResult ShowSaveFileDialog()

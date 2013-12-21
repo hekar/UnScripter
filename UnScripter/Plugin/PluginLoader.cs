@@ -26,12 +26,12 @@ namespace UnScripter.Plugin
         public List<UsPlugin> ListPlugins()
         {
             var files = Directory.GetFiles(directory)
-                .Where(s => s.ToUpper().EndsWith("_PLUGIN.DLL"));
+                .Where(s => s.ToUpper().EndsWith("PLUGIN.DLL"));
 
             var plugins = files.Select(file =>
             {
                 Assembly assembly = Assembly.LoadFrom(file);
-                Type type = assembly.GetType("Plugin");
+                Type type = assembly.GetType("DeusExPlugin.Plugin");
                 return Activator.CreateInstance(type) as UsPlugin;
             });
 

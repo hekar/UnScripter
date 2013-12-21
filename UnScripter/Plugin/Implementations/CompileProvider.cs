@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using UnScripterPlugin.Build;
 using UnScripterPlugin.Project;
 
 namespace UnScripter.Plugin.Implementations
 {
-    class CompileProvider : Compile
+    class CompileProvider
     {
         private readonly ProjectManager projectManager;
         private StubCompile compile;
@@ -57,7 +56,7 @@ namespace UnScripter.Plugin.Implementations
             compile.EndMake();
         }
 
-        private class StubCompile : Compile
+        private class StubCompile
         {
             public bool FullRebuild
             {

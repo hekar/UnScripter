@@ -1,9 +1,9 @@
 using Ninject;
 using System;
 using System.Windows.Forms;
-using UnScripterPlugin.Build;
 using UnScripterPlugin;
 using System.Drawing;
+using System.Reactive;
 
 namespace UnScripter
 {
@@ -32,8 +32,7 @@ namespace UnScripter
             EditorTabManager editorTabManager, 
             UiSettings uiSettings, 
             GlobalSettings globalsSettings,
-            Compile compiler,
-            Run run)
+            EventStream eventStream)
         {
             InitializeComponent();
 
@@ -42,8 +41,7 @@ namespace UnScripter
             this.editorTabManager = editorTabManager;
             this.uiSettings = uiSettings;
             this.globalsSettings = globalsSettings;
-            this.compiler = compiler;
-            this.run = run;
+            this.eventStream = eventStream;
 
             FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
@@ -82,7 +80,7 @@ namespace UnScripter
             this.GoToParentToolStripMenuItem.Click += editMenu.GotoParentClassToolStripMenuItem_Click;
         
             // Build menu
-            buildMenu = new BuildMenu(this, projectManager, compiler, run);
+            buildMenu = new BuildMenu(this, projectManager);
 
             this.BuildToolStripMenuItem.DropDownOpening += buildMenu.BuildMenu_DropDown;
 
@@ -179,7 +177,7 @@ namespace UnScripter
                     App.Kernel.Get<OptionsDialog>(), App.Kernel.Get<ResourceDialog>());
                 this.externalMenu = new ExternalMenu(projectManager);
 
-                backgroundWorkers = new BackgroundWorkers(this, projectManager, compiler, run);
+                backgroundWorkers = new BackgroundWorkers(this, projectManager);
                 controlEvents = new ControlEvents(this, editorTabManager, projectManager);
 
                 // TODO: Fix
@@ -238,8 +236,7 @@ namespace UnScripter
         private MainFormDocks docks;
         private UiSettings uiSettings;
         private GlobalSettings globalsSettings;
-        private Compile compiler;
-        private Run run;
+        private EventStream eventStream;
 
         public ErrorView ErrorView
         {

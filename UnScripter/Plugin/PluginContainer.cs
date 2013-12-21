@@ -1,4 +1,5 @@
 ﻿
+using Ninject;
 using System.Collections.Generic;
 using UnScripterPlugin.Plugin;
 namespace UnScripter.Plugin
@@ -9,6 +10,12 @@ namespace UnScripter.Plugin
     class PluginContainer
     {
         private readonly PluginLoader pluginLoader;
+
+        [Inject]
+        public PluginContainer(PluginLoader pluginLoader)
+        {
+            this.pluginLoader = pluginLoader;
+        }
 
         private readonly List<UsPlugin> plugins = new List<UsPlugin>();
         public List<UsPlugin> Plugins
@@ -22,11 +29,6 @@ namespace UnScripter.Plugin
 
                 return plugins;
             }
-        }
-
-        public PluginContainer(PluginLoader pluginLoader)
-        {
-            this.pluginLoader = pluginLoader;
         }
     }
 }

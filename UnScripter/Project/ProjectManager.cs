@@ -1,4 +1,5 @@
 using Ninject;
+using UnScripter.Project;
 using UnScripterPlugin.Project;
 
 namespace UnScripter
@@ -32,44 +33,34 @@ namespace UnScripter
 
         public void ChangeProject(UsProject newproject)
         {
-            // Clear all the old files from the fileview
-            //mainForm.FileView.Nodes.Clear();
-
             var newProjectName = newproject.ProjectName;
             var newProjectFileName = newproject.ProjectFileName;
             var newDevelopmentFolder = newproject.DevelopmentFolder;
             var newFileList = newproject.FileList;
-            //var newFileTreeView = newproject.FileTreeView;
 
-            // Are we using a tree format or a straight list
-            if (Globals.UseFileTree)
-            {
-                //newFileTreeView = new ProjectFileTree(newProjectName, mainForm.FileView, newDevelopmentFolder, Globals.kProjectFileRegex);
-            }
-            else
-            {
-                //var paren = mainForm.FileView.Nodes.Add(newProjectName);
-                //foreach (var actfilename in newFileList.RelativeFiles) {
-                //    paren.Nodes.Add(actfilename);
-                //}
-            }
+            newFileList.ScanDirectory(newproject.ProjectFolder);
 
             globalSettings.SetTrait("LastProjectPath", newProjectFileName);
+            //mainForm.FileView.Nodes.Clear();
             //mainForm.FileStatusLabel.Text = "Opened Project " + newProjectName;
-
             //mainForm.StartParser();
-
             //newFileTreeView.ExpandDefaultFolders();
         }
 
         public UsProject CreateProject(string name, string path)
         {
-            return new Project.UnScripterProject(name, path, Globals.ProjectFileRegex);
+            return new UnScripterProject(name, path, Globals.ProjectFileRegex);
         }
 
         public UsProject OpenProject(string path)
         {
-            return OpenProject(path);
+            var data = new UsProjectData();
+            data.Load(path);
+
+            var name = data.Properties["Name"];
+            var root = data.Properties["RootFolder"];
+
+            return new UnScripterProject(name, root, Globals.ProjectFileRegex);
         }
     }
 }

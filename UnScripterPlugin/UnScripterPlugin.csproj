@@ -46,11 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Build\Compile.cs" />
-    <Compile Include="Build\CompileError.cs" />
-    <Compile Include="Build\Run.cs" />
     <Compile Include="ErrorReceiver.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Plugin\Build\Make.cs" />
     <Compile Include="Plugin\Job\Job.cs" />
     <Compile Include="Plugin\Job\JobQueuer.cs" />
     <Compile Include="Plugin\Menu\MenuItem.cs" />

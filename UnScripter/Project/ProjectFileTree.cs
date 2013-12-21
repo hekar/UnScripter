@@ -15,18 +15,18 @@ namespace UnScripter.Project
             get { return filetree; }
         }
 
-        public ProjectFileTree(string projectname, TreeView fileview, string folder, string regular_match = "")
+        public ProjectFileTree(string projectname, TreeView fileview, string folder, string fileMatch = "")
         {
             filetree = fileview;
             projectName = projectname;
 
-            ScanDirectory(folder, regular_match);
+            ScanDirectory(folder, fileMatch);
         }
 
 
-        public void ScanDirectory(string folder, string regular_match = "", TreeNode lastnode = null)
+        public void ScanDirectory(string folder, string fileMatch = "", TreeNode lastnode = null)
         {
-            Regex re = new Regex(regular_match);
+            Regex re = new Regex(fileMatch);
 
             DirectoryInfo dir = new DirectoryInfo(folder);
             if ((lastnode == null))
@@ -70,7 +70,7 @@ namespace UnScripter.Project
             foreach (DirectoryInfo dir_loopVariable in dir.GetDirectories())
             {
                 dir = dir_loopVariable;
-                ScanDirectory(dir.FullName, regular_match, lastnode);
+                ScanDirectory(dir.FullName, fileMatch, lastnode);
                 lastnode = lastnode.Parent;
             }
         }

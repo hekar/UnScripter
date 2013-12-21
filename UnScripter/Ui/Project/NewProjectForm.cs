@@ -34,6 +34,11 @@ namespace UnScripter
                 {
                     gameComboBox.Items.Add(plugin.Name);
                 }
+
+                if (gameComboBox.Items.Count > 0)
+                {
+                    gameComboBox.SelectedIndex = 0;
+                }
             }
 
             TextBoxUDKDir.Text = Globals.DefaultUDKFolder;

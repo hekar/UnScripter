@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using UnScripter.Plugin;
 using UnScripter.Plugin.Implementations;
-using UnScripterPlugin.Build;
 
 namespace UnScripter.Ninject
 {
@@ -15,9 +14,6 @@ namespace UnScripter.Ninject
         {
             this.Bind<PluginLoader>().ToConstant(new PluginLoader("plugins"));
             this.Bind<PluginContainer>().ToSelf().InSingletonScope();
-
-            this.Bind<Compile>().To<CompileProvider>();
-            this.Bind<Run>().To<RunProvider>();
         }
     }
 }

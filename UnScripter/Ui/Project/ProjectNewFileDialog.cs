@@ -2,12 +2,14 @@ using Ninject;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using UnScripter.Plugin;
 
 namespace UnScripter
 {
     partial class ProjectNewFileDialog
     {
         private ProjectManager projectManager;
+        private PluginContainer pluginContainer;
 
         [Inject]
         public ProjectNewFileDialog(ProjectManager projectManager)
