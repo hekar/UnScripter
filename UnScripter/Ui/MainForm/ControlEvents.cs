@@ -1,15 +1,14 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using Ninject;
 using UnScripterPlugin.Project;
 
 namespace UnScripter
 {
-
     // Events for controls inside of the Mainform
     class ControlEvents
     {
-
         // Context Menu strips
         private ProjectFileContextMenu ProjectFileMenuStrip { get; set; }
         private ProjectFolderContextMenu ProjectFolderMenuStrip { get; set; }
@@ -17,14 +16,16 @@ namespace UnScripter
         private readonly EditorTabManager editorTabManager;
         private readonly ProjectManager projectManager;
 
-        public ControlEvents(MainForm mainForm, EditorTabManager editorTabManager, ProjectManager projectManager)
+        [Inject]
+        public ControlEvents(MainForm mainForm, EditorTabManager editorTabManager, 
+            ProjectManager projectManager)
         {
             this.mainForm = mainForm;
             this.editorTabManager = editorTabManager;
             this.projectManager = projectManager;
         }
 
-        public void FileView_KeyDown(System.Object sender, System.Windows.Forms.KeyEventArgs e)
+        public void FileView_KeyDown(System.Object sender, KeyEventArgs e)
         {
             var selectednode = mainForm.FileView.SelectedNode;
             if ((selectednode != null))
@@ -65,7 +66,7 @@ namespace UnScripter
             }
         }
 
-        public void FileView_MouseClick(System.Object sender, System.Windows.Forms.MouseEventArgs e)
+        public void FileView_MouseClick(System.Object sender, MouseEventArgs e)
         {
             TreeNode node = (TreeNode)mainForm.FileView.GetNodeAt(e.Location);
             mainForm.FileView.SelectedNode = node;
@@ -74,7 +75,7 @@ namespace UnScripter
 
             var curproj = projectManager.CurrentProject;
 
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 if (mainForm.FileView.FileViewType != FileView.FileViewMode.CLASSIC)
                 {
@@ -92,7 +93,7 @@ namespace UnScripter
                     }
                 }
             }
-            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right)
             {
                 // Open the context menu
                 if (curproj.FileList.IsProjectFile(fullpath))
@@ -121,7 +122,7 @@ namespace UnScripter
             }
         }
 
-        public void FileView_NodeMouseDoubleClick(System.Object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
+        public void FileView_NodeMouseDoubleClick(System.Object sender, TreeNodeMouseClickEventArgs e)
         {
             var profilename = projectManager.CurrentProject.DevelopmentFolder +
                 mainForm.FileView.SelectedNode.FullPath.Replace(projectManager.CurrentProject.ProjectName + "\\", "");
@@ -133,7 +134,7 @@ namespace UnScripter
             }
         }
 
-        public void EditorTabs_KeyDown(System.Object sender, System.Windows.Forms.KeyEventArgs e)
+        public void EditorTabs_KeyDown(System.Object sender, KeyEventArgs e)
         {
             if (e.Modifiers.HasFlag(Keys.Control))
             {
@@ -145,7 +146,7 @@ namespace UnScripter
         }
 
 
-        public void EditorTabs_MouseClick(System.Object sender, System.Windows.Forms.MouseEventArgs e)
+        public void EditorTabs_MouseClick(System.Object sender, MouseEventArgs e)
         {
             editorTabManager.TabClicked = null;
             for (int i = 0; i <= mainForm.EditorTabs.TabCount - 1; i++)
@@ -158,7 +159,7 @@ namespace UnScripter
             }
 
             // Exit Tabs on Middle Click
-            if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            if (e.Button == MouseButtons.Middle)
             {
                 editorTabManager.CloseTab(editorTabManager.TabClicked.Name);
             }

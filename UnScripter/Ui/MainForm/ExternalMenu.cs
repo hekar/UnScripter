@@ -18,9 +18,11 @@ namespace UnScripter
         {
             Process proc = new Process();
             ProcessStartInfo startinfo = new ProcessStartInfo();
-            startinfo.FileName = projectManager.CurrentProject.ProjectFolder + "\\Binaries\\UDKLift.exe";
+            startinfo.FileName = Path.Combine(
+                projectManager.CurrentProject.ProjectFolder, "Binaries", "UDKLift.exe");
             startinfo.Arguments = "editor";
-            startinfo.WorkingDirectory = projectManager.CurrentProject.ProjectFolder + "\\Binaries\\";
+            startinfo.WorkingDirectory = Path.Combine(
+                projectManager.CurrentProject.ProjectFolder, "Binaries");
             proc.StartInfo = startinfo;
             proc.Start();
         }
@@ -29,8 +31,10 @@ namespace UnScripter
         {
             Process proc = new Process();
             ProcessStartInfo startinfo = new ProcessStartInfo();
-            startinfo.FileName = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries", "UnrealLoc.exe");
-            startinfo.WorkingDirectory = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries");
+            startinfo.FileName = Path.Combine(projectManager.CurrentProject.ProjectFolder, 
+                "Binaries", "UnrealLoc.exe");
+            startinfo.WorkingDirectory = Path.Combine(
+                projectManager.CurrentProject.ProjectFolder, "Binaries");
             proc.StartInfo = startinfo;
             proc.Start();
         }
@@ -39,8 +43,10 @@ namespace UnScripter
         {
             Process proc = new Process();
             ProcessStartInfo startinfo = new ProcessStartInfo();
-            startinfo.FileName = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries", "UnrealFrontend.exe");
-            startinfo.WorkingDirectory = Path.Combine(projectManager.CurrentProject.ProjectFolder, "Binaries");
+            startinfo.FileName = Path.Combine(projectManager.CurrentProject.ProjectFolder, 
+                "Binaries", "UnrealFrontend.exe");
+            startinfo.WorkingDirectory = Path.Combine(
+                projectManager.CurrentProject.ProjectFolder, "Binaries");
             proc.StartInfo = startinfo;
             proc.Start();
         }
@@ -50,7 +56,8 @@ namespace UnScripter
             Process proc = new Process();
             ProcessStartInfo startinfo = new ProcessStartInfo();
             startinfo.FileName = Globals.DefaultExplorer;
-            startinfo.Arguments = Path.Combine(projectManager.CurrentProject.ProjectFolder, "UDKGame", "Config");
+            startinfo.Arguments = Path.Combine(projectManager.CurrentProject.ProjectFolder, 
+                "UDKGame", "Config");
             proc.StartInfo = startinfo;
             proc.Start();
         }
@@ -73,10 +80,11 @@ namespace UnScripter
             startinfo.FileName = curdir + Globals.DefaultTerminal;
 
             // Add in directories to the PATH
-            startinfo.Arguments = "\"" + curdir + "\"" + " " + "\"" + curdir + "\\scripts" + "\"";
+            startinfo.Arguments = Path.Combine(curdir, "scripts");
             if (projectManager.CurrentProject != null)
             {
-                startinfo.Arguments += " " + "\"" + projectManager.CurrentProject.ProjectFolder + "Binaries" + "\"";
+                startinfo.Arguments += Path.Combine(curdir,
+                    projectManager.CurrentProject.ProjectFolder, "Binaries");
             }
 
             startinfo.WorkingDirectory = projectManager.CurrentProject.ProjectFolder;

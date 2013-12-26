@@ -53,34 +53,38 @@ class EditorTabPage : TabPage
     private bool projectfilesaved = true;
     public bool ShouldCloseTab()
     {
-
         if (!projectfilesaved)
         {
-            // Ask if really want to quit and if want to save project file
-            var result = MessageBox.Show("Do you want to save before closing?", "Save File?", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
-            {
-                // Save File...
-                SaveFile();
-                return true;
-            }
-            else if (result == DialogResult.No)
-            {
-                // Close it without saving
-                return true;
-            }
-            else if (result == DialogResult.Cancel)
-            {
-                return false;
-            }
-
-            return false;
+            return CheckSaveFile();
         }
         else
         {
             return true;
         }
 
+    }
+
+    private bool CheckSaveFile()
+    {
+        // Ask if really want to quit and if want to save project file
+        var result = MessageBox.Show("Do you want to save before closing?", "Save File?", MessageBoxButtons.YesNoCancel);
+        if (result == DialogResult.Yes)
+        {
+            // Save File...
+            SaveFile();
+            return true;
+        }
+        else if (result == DialogResult.No)
+        {
+            // Close it without saving
+            return true;
+        }
+        else if (result == DialogResult.Cancel)
+        {
+            return false;
+        }
+
+        return false;
     }
 
     public void SaveFile()

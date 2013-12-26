@@ -67,6 +67,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
@@ -82,6 +83,9 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -91,6 +95,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="netfx\System\Collections\Generic\DictionaryFind.cs" />
+    <Compile Include="netfx\System\Guard.cs" />
+    <Compile Include="netfx\System\Reactive\EventPattern.cs" />
+    <Compile Include="netfx\System\Reactive\EventStream.cs" />
+    <Compile Include="netfx\System\Reactive\IEventPattern.cs" />
+    <Compile Include="netfx\System\Reactive\IEventStream.cs" />
+    <Compile Include="netfx\System\Reactive\IEventStreamExtensions.cs" />
+    <Compile Include="netfx\System\Reactive\Visibility.cs" />
     <Compile Include="Ninject\PluginModule.cs" />
     <Compile Include="Plugin\Implementations\CompileError.cs" />
     <Compile Include="Plugin\Implementations\CompileProvider.cs" />
@@ -337,6 +349,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt" />
+    <Content Include="netfx\System\Reactive\Readme.txt" />
     <Content Include="Resources\filesaveas1.png" />
     <Content Include="Resources\underconstruction.png" />
   </ItemGroup>

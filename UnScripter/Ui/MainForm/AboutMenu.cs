@@ -1,11 +1,11 @@
 using System;
- namespace UnScripter
+namespace UnScripter
 {
-	public class AboutMenu
-	{
-		public void ShowAboutBox(object sender, EventArgs e)
-		{
-			new AboutBox().Show();
-		}
-	}
+    public class AboutMenu
+    {
+        public void ShowAboutBox(object sender, EventArgs e)
+        {
+            new AboutBox().Show();
+        }
+    }
 }
