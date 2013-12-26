@@ -7,6 +7,9 @@ using UnrealScriptLib.Unreal;
 
 namespace UnScripter
 {
+    /// <summary>
+    /// ???
+    /// </summary>
     class BackgroundWorkers
     {
         private readonly MainForm mainForm;

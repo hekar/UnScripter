@@ -33,7 +33,7 @@ namespace UnScripter
 
 		private void OpenPath(object sender, EventArgs e)
 		{
-			ClickedProjectFolder.OpenPath();
+			ClickedProjectFolder.OpenInSystemExplorer();
 		}
 
 		private void RefreshDirectories(object sender, EventArgs e)

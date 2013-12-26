@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Windows.Forms;
+using Ninject;
 
 namespace UnScripter
 {
@@ -9,7 +10,9 @@ namespace UnScripter
         private readonly MainFormDocks docks;
         private readonly EditorTabManager editorTabManager;
 
-        public WindowsMenu(MainForm mainForm, MainFormDocks docks, EditorTabManager editorTabManager)
+        [Inject]
+        public WindowsMenu(MainForm mainForm, 
+            MainFormDocks docks, EditorTabManager editorTabManager)
         {
             this.mainForm = mainForm;
             this.editorTabManager = editorTabManager;

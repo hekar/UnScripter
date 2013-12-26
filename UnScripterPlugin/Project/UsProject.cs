@@ -24,8 +24,6 @@ namespace UnScripterPlugin.Project
 
         string DevelopmentFolder { get; }
 
-
-        string NodeFullPathToFullName(string fullpath);
         void AddFile(string folder, string filename);
         void SaveProject();
     }

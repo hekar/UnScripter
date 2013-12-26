@@ -27,7 +27,7 @@ namespace UnScripter
         private BackgroundWorkers backgroundWorkers;
 
         [Inject]
-        public MainForm(ProjectManager projectManager, 
+        public MainForm(
             MainFormDocks docks,
             EditorTabManager editorTabManager, 
             UiSettings uiSettings, 
@@ -36,7 +36,6 @@ namespace UnScripter
         {
             InitializeComponent();
 
-            this.projectManager = projectManager;
             this.docks = docks;
             this.editorTabManager = editorTabManager;
             this.uiSettings = uiSettings;
@@ -80,7 +79,7 @@ namespace UnScripter
             this.GoToParentToolStripMenuItem.Click += editMenu.GotoParentClassToolStripMenuItem_Click;
         
             // Build menu
-            buildMenu = new BuildMenu(this, projectManager);
+            buildMenu = new BuildMenu(this);
 
             this.BuildToolStripMenuItem.DropDownOpening += buildMenu.BuildMenu_DropDown;
 
@@ -164,12 +163,13 @@ namespace UnScripter
             AddBackgroundWorkers();
         }
 
-        // Main
         private void MainForm_Load(System.Object sender, System.EventArgs e)
         {
             try
             {
                 Text = Globals.ApplicationName;
+
+                var projectManager = App.Kernel.Get<ProjectManager>();
 
                 fileMenu = new FileMenu(this, projectManager, App.Kernel.Get<NewProjectForm>(), editorTabManager, App.Kernel.Get<ProjectNewFileDialog>());
                 editMenu = new EditMenu(this, editorTabManager, projectManager);

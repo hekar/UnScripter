@@ -8,13 +8,11 @@ namespace UnScripter
     class ClassView : TreeView
     {
         private readonly EditorTabManager editorTabManager;
-        private readonly ProjectManager projectManager;
 
         [Inject]
-        public ClassView(EditorTabManager editorTabManager, ProjectManager projectManager)
+        public ClassView(EditorTabManager editorTabManager)
         {
             this.editorTabManager = editorTabManager;
-            this.projectManager = projectManager;
             DoubleClick += ClassView_DoubleClick;
             KeyDown += ClassView_KeyDown;
             Font = new Font("Segoe UI", 9.5f);
@@ -36,6 +34,7 @@ namespace UnScripter
 
         private void OpenSelectedNodeEditorTab()
         {
+#if false
             if (projectManager.ProjectOpen)
             {
                 var curproj = projectManager.CurrentProject;
@@ -79,6 +78,7 @@ namespace UnScripter
                     }
                 }
             }
+#endif
         }
     }
 }

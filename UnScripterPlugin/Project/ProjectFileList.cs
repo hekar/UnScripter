@@ -5,19 +5,18 @@ using System.Text.RegularExpressions;
 
 namespace UnScripterPlugin.Project
 {
-    // Creates a simple list of projectfiles
     public class ProjectFileList
     {
-        private UsProject _project;
-        private List<ProjectFile> _projectfiles = new List<ProjectFile>();
+        private UsProject project;
+        private List<ProjectFile> projectfiles = new List<ProjectFile>();
 
-        private List<ProjectFolder> _projectfolders = new List<ProjectFolder>();
+        private List<ProjectFolder> projectfolders = new List<ProjectFolder>();
         public List<string> Files
         {
             get
             {
                 List<string> filenames = new List<string>();
-                foreach (var projectfile in _projectfiles)
+                foreach (var projectfile in projectfiles)
                 {
                     filenames.Add(projectfile.FullName);
                 }
@@ -31,9 +30,9 @@ namespace UnScripterPlugin.Project
             get
             {
                 List<string> filenames = new List<string>();
-                foreach (ProjectFile projectfile in _projectfiles)
+                foreach (ProjectFile projectfile in projectfiles)
                 {
-                    filenames.Add(projectfile.FullName.Replace(_project.DevelopmentFolder, ""));
+                    filenames.Add(projectfile.FullName.Replace(project.DevelopmentFolder, ""));
                 }
 
                 return filenames;
@@ -42,17 +41,17 @@ namespace UnScripterPlugin.Project
 
         public List<ProjectFile> ProjectFiles
         {
-            get { return _projectfiles; }
+            get { return projectfiles; }
         }
 
         public List<ProjectFolder> ProjectFolders
         {
-            get { return _projectfolders; }
+            get { return projectfolders; }
         }
 
         public bool IsProjectFile(string fullname)
         {
-            foreach (var projectfile in _projectfiles)
+            foreach (var projectfile in projectfiles)
             {
                 if (projectfile.FullName == fullname)
                 {
@@ -65,7 +64,7 @@ namespace UnScripterPlugin.Project
 
         public bool IsProjectFolder(string fullname)
         {
-            foreach (ProjectFolder profolder in _projectfolders)
+            foreach (ProjectFolder profolder in projectfolders)
             {
                 if (profolder.FullName == fullname)
                 {
@@ -78,7 +77,7 @@ namespace UnScripterPlugin.Project
 
         public ProjectFile GetProjectFile(string fullname)
         {
-            foreach (var projectfile in _projectfiles)
+            foreach (var projectfile in projectfiles)
             {
                 if (projectfile.FullName == fullname)
                 {
@@ -91,7 +90,7 @@ namespace UnScripterPlugin.Project
 
         public ProjectFile GetProjectFileByClassName(string name)
         {
-            foreach (ProjectFile projectfile in _projectfiles)
+            foreach (ProjectFile projectfile in projectfiles)
             {
                 if (projectfile.UnrealClass.Name == name)
                 {
@@ -104,7 +103,7 @@ namespace UnScripterPlugin.Project
 
         public ProjectFolder GetProjectFolder(string fullname)
         {
-            foreach (ProjectFolder projectfolder in _projectfolders)
+            foreach (ProjectFolder projectfolder in projectfolders)
             {
                 if (projectfolder.FullName == fullname)
                 {
@@ -117,13 +116,14 @@ namespace UnScripterPlugin.Project
 
         public ProjectFileList(UsProject project)
         {
-            _project = project;
+            this.project = project;
         }
 
-        public ProjectFileList(UsProject project, string rootdir, string regular_match = "", bool recursive = true)
+        public ProjectFileList(UsProject project, string rootDirectory, 
+            string regularMatch = "", bool recursive = true)
         {
-            _project = project;
-            ScanDirectory(rootdir, regular_match, recursive);
+            this.project = project;
+            ScanDirectory(rootDirectory, regularMatch, recursive);
         }
 
         public void RefreshDirectories()
@@ -149,7 +149,7 @@ namespace UnScripterPlugin.Project
                 dir.Create();
             }
 
-            _projectfolders.Add(new ProjectFolder(dir));
+            projectfolders.Add(new ProjectFolder(dir));
 
             foreach (var fileinfo in dir.GetFiles())
             {
@@ -158,7 +158,7 @@ namespace UnScripterPlugin.Project
                 {
                     // Add file to list
                     ProjectFile actorFile = new ProjectFile(fileinfo.FullName);
-                    _projectfiles.Add(actorFile);
+                    projectfiles.Add(actorFile);
                 }
             }
 

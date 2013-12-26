@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using Ninject;
 using UnScripter.Project;
 using UnScripterPlugin.Project;
@@ -21,8 +22,9 @@ namespace UnScripter
         }
 
         [Inject]
-        public ProjectManager(GlobalSettings globalSettings)
+        public ProjectManager(MainForm mainForm, GlobalSettings globalSettings)
         {
+            this.mainForm = mainForm;
             this.globalSettings = globalSettings;
         }
 
@@ -31,19 +33,19 @@ namespace UnScripter
             get { return (CurrentProject != null); }
         }
 
-        public void ChangeProject(UsProject newproject)
+        public void ChangeProject(UsProject project)
         {
-            var newProjectName = newproject.ProjectName;
-            var newProjectFileName = newproject.ProjectFileName;
-            var newDevelopmentFolder = newproject.DevelopmentFolder;
-            var newFileList = newproject.FileList;
+            project.FileList.ScanDirectory(project.ProjectFolder);
+            globalSettings.SetTrait("LastProjectPath", project.ProjectName);
+            mainForm.FileView.Nodes.Clear();
+            foreach (var item in project.FileList.ProjectFiles)
+            {
+                mainForm.FileView.Nodes.Add(item.FullName, item.FileName);
+            }
 
-            newFileList.ScanDirectory(newproject.ProjectFolder);
-
-            globalSettings.SetTrait("LastProjectPath", newProjectFileName);
-            //mainForm.FileView.Nodes.Clear();
-            //mainForm.FileStatusLabel.Text = "Opened Project " + newProjectName;
-            //mainForm.StartParser();
+            mainForm.FileStatusLabel.Text =
+                string.Format("Opened Project {0}", project.ProjectName);
+            mainForm.StartParser();
             //newFileTreeView.ExpandDefaultFolders();
         }
 
@@ -62,5 +64,7 @@ namespace UnScripter
 
             return new UnScripterProject(name, root, Globals.ProjectFileRegex);
         }
+
+        public MainForm mainForm { get; set; }
     }
 }

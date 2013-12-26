@@ -32,7 +32,7 @@ namespace UnScripter
 
         public void OpenEditor_Clicked(object sender, EventArgs e)
         {
-            ClickedProjectFile.OpenEditor();
+            ClickedProjectFile.OpenInSystemEditor();
         }
 
         public void RenameFile_Clicked(object sender, EventArgs e)

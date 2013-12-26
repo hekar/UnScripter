@@ -9,8 +9,9 @@ using UnScripterPlugin.Project;
 class EditorTabPage : TabPage
 {
     private bool firstchange = true;
-    public EditorTabPage(string name, ProjectFile projectfile)
+    public EditorTabPage(string name, ProjectFile projectfile, Scintilla editor)
     {
+        this.scintilla = editor;
         this.projectfile = projectfile;
     }
 
@@ -26,15 +27,15 @@ class EditorTabPage : TabPage
         get { return projectfile.FullName; }
     }
 
-    private Scintilla scintila;
+    private Scintilla scintilla;
     public Scintilla ScintillaEditor
     {
-        get { return scintila; }
+        get { return scintilla; }
     }
 
     public void OnControlAdded(object sender, EventArgs e)
     {
-        scintila = (Scintilla)Controls[0];
+        scintilla = (Scintilla)Controls[0];
     }
 
     public void OnEditorTextChanged()
@@ -89,7 +90,7 @@ class EditorTabPage : TabPage
 
     public void SaveFile()
     {
-        projectfile.FileContents = scintila.Text;
+        projectfile.FileContents = scintilla.Text;
         projectfilesaved = true;
     }
 

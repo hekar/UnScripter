@@ -14,29 +14,21 @@ namespace UnScripterPlugin.Project
         {
             get
             {
-                int lastslash = FullName.LastIndexOf("\\");
-                if (lastslash >= 0)
-                {
-                    return FullName.Substring(lastslash + 1, FullName.Length - lastslash - 1);
-                }
-                else
-                {
-                    return FullName;
-                }
+                return Path.GetFileName(FullName);
             }
         }
 
-        private string _filecontents = "";
+        private string filecontents = "";
         public string FileContents
         {
             get
             {
                 LoadContents();
-                return _filecontents;
+                return filecontents;
             }
             set
             {
-                _filecontents = value;
+                filecontents = value;
                 SaveContents();
             }
         }
@@ -45,8 +37,7 @@ namespace UnScripterPlugin.Project
         {
             get
             {
-                var lastslash = FullName.LastIndexOf("\\");
-                return FullName.Substring(0, lastslash);
+                return Path.GetDirectoryName(FullName);
             }
         }
 
@@ -67,14 +58,14 @@ namespace UnScripterPlugin.Project
         private void LoadContents()
         {
             StreamReader reader = new StreamReader(FullName);
-            _filecontents = reader.ReadToEnd();
+            filecontents = reader.ReadToEnd();
             reader.Close();
         }
 
         public void SaveContents()
         {
             StreamWriter writer = new StreamWriter(FullName);
-            writer.Write(_filecontents);
+            writer.Write(filecontents);
             writer.Close();
 
             //mainForm.FileStatusLabel.Text = "Saved: " + FileName;
@@ -91,7 +82,7 @@ namespace UnScripterPlugin.Project
         }
 
         // Open an external editor
-        public void OpenEditor()
+        public void OpenInSystemEditor()
         {
             // TODO: Add in default editor
             Process proc = new Process();

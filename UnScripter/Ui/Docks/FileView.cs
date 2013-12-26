@@ -30,14 +30,14 @@ namespace UnScripter
             MODERN
         }
 
-        private FileViewMode _fileviewmode = FileViewMode.CLASSIC;
+        private FileViewMode fileviewmode = FileViewMode.CLASSIC;
         private UiSettings uiSettings;
         public FileViewMode FileViewType
         {
-            get { return _fileviewmode; }
+            get { return fileviewmode; }
             set
             {
-                _fileviewmode = value;
+                fileviewmode = value;
                 switch (value)
                 {
                     case FileViewMode.CLASSIC:

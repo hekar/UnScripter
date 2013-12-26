@@ -35,7 +35,7 @@ namespace UnScripter
 
         private void OpenEditorButton_Click(object sender, EventArgs e)
         {
-            editorTabManager.SelectedTabProjectFile.OpenEditor();
+            editorTabManager.SelectedTabProjectFile.OpenInSystemEditor();
         }
 
         private void CloseAllButton_Click(object sender, EventArgs e)

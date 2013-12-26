@@ -40,7 +40,7 @@ namespace UnScripter
 
         private void LinkLabelFullPath_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ProjectFile.OpenEditor();
+            ProjectFile.OpenInSystemEditor();
         }
     }
 }

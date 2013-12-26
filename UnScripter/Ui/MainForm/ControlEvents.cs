@@ -33,7 +33,7 @@ namespace UnScripter
                 if (e.KeyCode == Keys.Enter)
                 {
                     var curproj = projectManager.CurrentProject;
-                    string fullpath = curproj.NodeFullPathToFullName(selectednode.FullPath);
+                    string fullpath = selectednode.Name;
                     if (curproj.FileList.IsProjectFile(fullpath))
                     {
                         var projectfile = curproj.FileList.GetProjectFile(fullpath);
@@ -70,17 +70,17 @@ namespace UnScripter
         {
             TreeNode node = (TreeNode)mainForm.FileView.GetNodeAt(e.Location);
             mainForm.FileView.SelectedNode = node;
-            string fullpath = projectManager.CurrentProject.NodeFullPathToFullName(node.FullPath);
-            fullpath = fullpath.Replace(projectManager.CurrentProject.ProjectName + "\\", "");
+            string fullname = node.Name;
 
-            var curproj = projectManager.CurrentProject;
+            var project = projectManager.CurrentProject;
 
             if (e.Button == MouseButtons.Left)
             {
                 if (mainForm.FileView.FileViewType != FileView.FileViewMode.CLASSIC)
                 {
-                    // Expand the Folder
-                    if (!curproj.FileList.IsProjectFile(fullpath) & !fullpath.EndsWith(curproj.ProjectName))
+                    bool folder = !(project.FileList.IsProjectFile(fullname) ||
+                        fullname.EndsWith(project.ProjectName));
+                    if (folder)
                     {
                         if (node.IsExpanded)
                         {
@@ -91,24 +91,29 @@ namespace UnScripter
                             node.ExpandAll();
                         }
                     }
+                    else
+                    {
+                        var file = project.FileList.GetProjectFile(fullname);
+                        editorTabManager.AddTab(node.Text, file);
+                    }
                 }
             }
             else if (e.Button == MouseButtons.Right)
             {
                 // Open the context menu
-                if (curproj.FileList.IsProjectFile(fullpath))
+                if (project.FileList.IsProjectFile(fullname))
                 {
-                    ProjectFileMenuStrip.ClickedProjectFile = projectManager.CurrentProject.FileList.GetProjectFile(fullpath);
+                    ProjectFileMenuStrip.ClickedProjectFile = projectManager.CurrentProject.FileList.GetProjectFile(fullname);
 
                     var location = new System.Drawing.Point(e.Location.X, e.Location.Y + Convert.ToInt32(ProjectFileMenuStrip.Height / 2) +
                         Convert.ToInt32(ProjectFileMenuStrip.Items[0].Height * 1.5));
 
                     ProjectFileMenuStrip.Show(location);
                 }
-                else if (curproj.FileList.IsProjectFolder(fullpath))
+                else if (project.FileList.IsProjectFolder(fullname))
                 {
                     // Do a project folder context strip
-                    ProjectFolderMenuStrip.ClickedProjectFolder = projectManager.CurrentProject.FileList.GetProjectFolder(fullpath);
+                    ProjectFolderMenuStrip.ClickedProjectFolder = projectManager.CurrentProject.FileList.GetProjectFolder(fullname);
 
                     var location = new System.Drawing.Point(e.Location.X, e.Location.Y + Convert.ToInt32(ProjectFileMenuStrip.Height / 2) +
                         Convert.ToInt32(ProjectFileMenuStrip.Items[0].Height * 1.5));

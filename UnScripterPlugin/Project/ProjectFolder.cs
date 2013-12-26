@@ -24,7 +24,7 @@ namespace UnScripterPlugin.Project
             DirectoryInfo = dirinfo;
         }
 
-        public void OpenPath()
+        public void OpenInSystemExplorer()
         {
             Process proc = new Process();
             ProcessStartInfo startinfo = new ProcessStartInfo();

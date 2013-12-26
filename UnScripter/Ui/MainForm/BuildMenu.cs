@@ -8,17 +8,16 @@ namespace UnScripter
         private readonly ProjectManager projectManager;
 
         [Inject]
-        public BuildMenu(MainForm mainForm, ProjectManager projectManager)
+        public BuildMenu(MainForm mainForm)
         {
             this.mainForm = mainForm;
-            this.projectManager = projectManager;
         }
 
         public void BuildMenu_DropDown(System.Object sender, System.EventArgs e)
         {
-            mainForm.BuildAllToolStripMenuItem.Enabled = projectManager.ProjectOpen;
-            mainForm.BuildAndRunToolStripMenuItem.Enabled = projectManager.ProjectOpen;
-            mainForm.RunToolStripMenuItem.Enabled = projectManager.ProjectOpen;
+            //mainForm.BuildAllToolStripMenuItem.Enabled = projectManager.ProjectOpen;
+            //mainForm.BuildAndRunToolStripMenuItem.Enabled = projectManager.ProjectOpen;
+            //mainForm.RunToolStripMenuItem.Enabled = projectManager.ProjectOpen;
         }
 
         public void BuildAllToolStripMenuItem_Click(System.Object sender, System.EventArgs e)

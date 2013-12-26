@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using Ninject;
 
 namespace UnScripter
 {
@@ -9,7 +10,9 @@ namespace UnScripter
 		{
 			Appearance = TabAppearance.FlatButtons;
 
-            if (true)//Globals.UISettings.GetTrait("FlatTabs", true))
+            var uiSettings = App.Kernel.Get<UiSettings>();
+            var flat = uiSettings.GetTrait("FlatTabs", true);
+            if (flat)
             {
                 Appearance = TabAppearance.FlatButtons;
             }

@@ -42,13 +42,7 @@ namespace UnScripter.Project
         /// </summary>
         public string DevelopmentFolder
         {
-            get { return Path.Combine(ProjectFolder, "Development", "Src"); }
-        }
-
-        public string NodeFullPathToFullName(string fullpath)
-        {
-            // hmmm...
-            return DevelopmentFolder + fullpath.Replace(ProjectName + Path.DirectorySeparatorChar, "");
+            get { return Path.Combine(ProjectFolder); }
         }
 
         public UnScripterProject(string name, string udkDir, string browserRegex = Globals.ProjectFileRegex)
@@ -76,7 +70,7 @@ namespace UnScripter.Project
             for (int i = 0; i <= FileTreeView.FileTree.Nodes.Count - 1; i++)
             {
                 var node = FileTreeView.FileTree.Nodes[i];
-                if (NodeFullPathToFullName(node.FullPath) == folder)
+                if (node.FullPath == folder)
                 {
                     node.Nodes.Add(filename);
                 }

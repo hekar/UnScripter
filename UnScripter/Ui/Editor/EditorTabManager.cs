@@ -20,9 +20,9 @@ namespace UnScripter
         {
         }
 
-        private ProjectFile _selectedtabprojectfile;
-        private string _selectedtabname = "";
-        public EditorTabPage AddTab(string name, ProjectFile projecfile)
+        private ProjectFile selectedtabprojectfile;
+        private string selectedtabname = "";
+        public EditorTabPage AddTab(string name, ProjectFile projectFile)
         {
             TabPage tab = null;
             if (projectfiles.ContainsKey(name))
@@ -32,17 +32,19 @@ namespace UnScripter
             }
             else
             {
-                Tabs.TabPages.Add(new EditorTabPage(name, projecfile));
+                var editor = new ScintillaEditor();
+                var editorTab =  new EditorTabPage(name, projectFile, editor);
+                Tabs.TabPages.Add(editorTab);
                 tab = Tabs.TabPages[Tabs.TabPages.Count - 1];
                 tab.Name = name;
                 tab.Text = name;
-                tab.Controls.Add(new ScintillaEditor());
-                tab.Controls[tab.Controls.Count - 1].Text = projecfile.FileContents;
-                projectfiles.Add(name, projecfile);
+                tab.Controls.Add(editor);
+                tab.Controls[tab.Controls.Count - 1].Text = projectFile.FileContents;
+                projectfiles.Add(name, projectFile);
             }
 
-            _selectedtabname = name;
-            _selectedtabprojectfile = projecfile;
+            selectedtabname = name;
+            selectedtabprojectfile = projectFile;
 
             Tabs.SelectedTab = tab;
 
@@ -149,23 +151,23 @@ namespace UnScripter
 
         public string SelectedTabName
         {
-            get { return _selectedtabname; }
+            get { return selectedtabname; }
         }
 
         public EditorTabPage SelectedTab
         {
             get
             {
-                EditorTabPage selected_tab = default(EditorTabPage);
-                selected_tab = (EditorTabPage)Tabs.TabPages[_selectedtabname];
+                EditorTabPage selectedTab = default(EditorTabPage);
+                selectedTab = (EditorTabPage)Tabs.TabPages[selectedtabname];
 
-                return selected_tab;
+                return selectedTab;
             }
         }
 
         public ProjectFile SelectedTabProjectFile
         {
-            get { return _selectedtabprojectfile; }
+            get { return selectedtabprojectfile; }
         }
 
         public TabControl TabControl
